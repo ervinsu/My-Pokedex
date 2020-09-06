@@ -29,8 +29,10 @@ ext {
                     'retrofit'     : 'com.squareup.retrofit2:retrofit:2.9.0'
             ],
             'koin'            : [
-                    'android': 'org.koin:koin-android:2.1.6',
-                    'scope'  : 'org.koin:koin-android-scope:2.1.6'
-            ]
+                    'android'  : 'org.koin:koin-android:2.2.0-alpha-1',
+                    'viewmodel': 'org.koin:koin-android-viewmodel:2.2.0-alpha-1',
+                    'scope'    : 'org.koin:koin-android-scope:2.2.0-alpha-1'
+            ],
+            'chuck'         : 'com.readystatesoftware.chuck:library:1.1.0'
     ]
 }

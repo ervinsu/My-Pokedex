@@ -5,14 +5,14 @@ import com.ervin.pokedex.core.data.source.remote.RemoteDataSource
 import com.ervin.pokedex.core.data.source.remote.network.ApiResponse
 import com.ervin.pokedex.core.data.source.remote.response.PokemonResponse
 import com.ervin.pokedex.core.domain.model.Pokemon
-import com.ervin.pokedex.core.domain.repository.home.IHomeRepository
+import com.ervin.pokedex.core.domain.repository.home.HomeRepositoryContract
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.flow
 
 class HomeRepository(
     private val remoteDataSource: RemoteDataSource
-) : IHomeRepository {
+) : HomeRepositoryContract {
     override fun getAllPokemon(): Flow<Resource<List<Pokemon>>> =
         flow {
             emit(Resource.Loading())

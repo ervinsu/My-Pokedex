@@ -20,6 +20,8 @@ dependencies {
     implementation libs.androidx.roomFlow
     implementation libs.androidx.coroutineCore
     implementation libs.androidx.coroutineAnd
+    implementation libs.chuck
+
     api libs.androidx.livedata
 
 }

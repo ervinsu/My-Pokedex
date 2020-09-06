@@ -1,6 +1,9 @@
 package com.ervin.pokedex.core.di
 
+import com.ervin.pokedex.core.data.source.remote.RemoteDataSource
+import com.readystatesoftware.chuck.ChuckInterceptor
 import okhttp3.OkHttpClient
+import org.koin.android.ext.koin.androidContext
 import org.koin.core.qualifier.named
 import org.koin.dsl.module
 import retrofit2.Retrofit
@@ -14,6 +17,7 @@ val localModule = module {
 val remoteModule = module {
     single {
         OkHttpClient.Builder()
+            .addInterceptor(ChuckInterceptor(androidContext()))
             .connectTimeout(120, TimeUnit.SECONDS)
             .readTimeout(120, TimeUnit.SECONDS)
             .build()
@@ -25,4 +29,8 @@ val remoteModule = module {
             .client(get())
             .build()
     }
+}
+
+val coreModule = module {
+    single { RemoteDataSource(get(), get()) }
 }
