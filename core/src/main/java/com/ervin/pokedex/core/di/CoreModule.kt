@@ -20,7 +20,7 @@ val remoteModule = module {
     }
     single(named("poke")) {
         Retrofit.Builder()
-            .baseUrl("https://dicoding-tourism-api.appspot.com/")
+            .baseUrl("https://pokeapi.co/api/v2/")
             .addConverterFactory(GsonConverterFactory.create())
             .client(get())
             .build()
