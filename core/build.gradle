@@ -1,0 +1,25 @@
+apply plugin: 'com.android.library'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+
+android {
+    compileSdkVersion androidVersion.compileSdkVersion
+    buildToolsVersion androidVersion.buildToolsVersion
+
+    defaultConfig {
+        minSdkVersion androidVersion.minSdkVersion
+        targetSdkVersion androidVersion.targetSdkVersion
+    }
+}
+
+dependencies {
+    implementation libs.retrofit2.retrofit
+    implementation libs.retrofit2.gson
+    implementation libs.koin.android
+    implementation libs.androidx.room
+    implementation libs.androidx.roomFlow
+    implementation libs.androidx.coroutineCore
+    implementation libs.androidx.coroutineAnd
+    api libs.androidx.livedata
+
+}
