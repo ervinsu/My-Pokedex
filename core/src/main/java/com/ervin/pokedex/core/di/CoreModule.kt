@@ -1,5 +1,8 @@
 package com.ervin.pokedex.core.di
 
+import androidx.room.Room
+import com.ervin.pokedex.core.data.source.local.LocalDataSource
+import com.ervin.pokedex.core.data.source.local.room.PokemonDatabase
 import com.ervin.pokedex.core.data.source.remote.RemoteDataSource
 import com.readystatesoftware.chuck.ChuckInterceptor
 import okhttp3.OkHttpClient
@@ -11,7 +14,13 @@ import retrofit2.converter.gson.GsonConverterFactory
 import java.util.concurrent.TimeUnit
 
 val localModule = module {
-
+    factory { get<PokemonDatabase>().pokemonDao() }
+    single {
+        Room.databaseBuilder(
+            androidContext(),
+            PokemonDatabase::class.java, "Pokedex.db"
+        ).fallbackToDestructiveMigration().build()
+    }
 }
 
 val remoteModule = module {
@@ -32,5 +41,6 @@ val remoteModule = module {
 }
 
 val coreModule = module {
+    single { LocalDataSource(get()) }
     single { RemoteDataSource(get(), get()) }
 }

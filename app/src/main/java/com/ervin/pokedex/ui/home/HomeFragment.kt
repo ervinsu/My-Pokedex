@@ -24,7 +24,7 @@ class HomeFragment : Fragment() {
         homeViewModel.pokemons.observe(viewLifecycleOwner, Observer {
             when (it) {
                 is Resource.Success -> {
-                    Toast.makeText(activity, "${it.data!!.size}", Toast.LENGTH_LONG).show()
+                    Toast.makeText(activity, "${it.data?.size}", Toast.LENGTH_LONG).show()
                     Log.d("HMM", "success")
                 }
                 is Resource.Error -> {

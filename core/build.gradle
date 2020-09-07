@@ -1,6 +1,9 @@
-apply plugin: 'com.android.library'
-apply plugin: 'kotlin-android'
-apply plugin: 'kotlin-android-extensions'
+plugins{
+    id 'com.android.library'
+    id 'kotlin-android'
+    id 'kotlin-android-extensions'
+    id 'kotlin-kapt'
+}
 
 android {
     compileSdkVersion androidVersion.compileSdkVersion
@@ -13,15 +16,31 @@ android {
 }
 
 dependencies {
+    //retrofit
     implementation libs.retrofit2.retrofit
     implementation libs.retrofit2.gson
+    implementation libs.retrofit2.retrofitRxJava2
+
+    //koin
     implementation libs.koin.android
+
+    //room
     implementation libs.androidx.room
     implementation libs.androidx.roomFlow
+    kapt           libs.androidx.roomCompiler
+
+    //coroutine
     implementation libs.androidx.coroutineCore
     implementation libs.androidx.coroutineAnd
+
+    //rx java
+    implementation libs.androidx.rxjava2
+    implementation libs.androidx.rxandroid
+
+    //chuck see API call
     implementation libs.chuck
 
+    //livedata
     api libs.androidx.livedata
 
 }

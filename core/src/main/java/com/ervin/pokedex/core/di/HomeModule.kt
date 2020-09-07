@@ -17,7 +17,7 @@ val homeApiModule = module {
 
 val homeRepositoryModule = module {
     single<HomeRepositoryContract> {
-        HomeRepository(get())
+        HomeRepository(get(), get())
     }
 }
 
