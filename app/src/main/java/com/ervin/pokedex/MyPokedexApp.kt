@@ -2,6 +2,7 @@ package com.ervin.pokedex
 
 import android.app.Application
 import com.ervin.pokedex.core.di.*
+import com.ervin.pokedex.di.firstLaunchServiceModule
 import com.ervin.pokedex.di.useCaseModules
 import com.ervin.pokedex.di.viewModelModules
 import org.koin.android.ext.koin.androidContext
@@ -24,6 +25,7 @@ class MyPokedexApp : Application() {
             listModules.add(detailApiModule)
             listModules.add(useCaseModules)
             listModules.add(viewModelModules)
+            listModules.add(firstLaunchServiceModule)
             modules(
                 listModules
             )

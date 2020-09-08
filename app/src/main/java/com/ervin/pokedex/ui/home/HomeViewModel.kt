@@ -9,6 +9,9 @@ import com.ervin.pokedex.core.domain.usecase.home.HomeUseCase
 
 class HomeViewModel(homeUseCase: HomeUseCase) : ViewModel() {
 
-    private val _pokemons = homeUseCase.getAllPokemon().asLiveData()
+    private val _pokemons = homeUseCase.getAllLocalPokemon().asLiveData()
+    private val _remotePokemon = homeUseCase.getAllRemotePokemon()
+
     val pokemons: LiveData<Resource<List<Pokemon>>> = _pokemons
+    val remotePokemon = _remotePokemon
 }

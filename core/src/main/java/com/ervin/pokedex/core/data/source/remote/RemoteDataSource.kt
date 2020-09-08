@@ -14,10 +14,13 @@ class RemoteDataSource(
     private val detailApiService: DetailApiService
 ) {
 
-    suspend fun getAllListPokemon(): Flow<ApiResponse<List<PokemonResponse>>> =
+    suspend fun getAllListPokemon(
+        limit: Int,
+        offset: Int
+    ): Flow<ApiResponse<List<PokemonResponse>>> =
         flow {
             try {
-                val response = homeApiService.getListPokemon(0, 20)
+                val response = homeApiService.getListPokemon(limit, offset)
                     .result
                     .map {
                         detailApiService.getPokemonByUrl(it.url)
