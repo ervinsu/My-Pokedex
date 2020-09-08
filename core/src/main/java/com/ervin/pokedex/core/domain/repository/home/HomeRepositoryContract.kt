@@ -5,7 +5,6 @@ import com.ervin.pokedex.core.domain.model.Pokemon
 import kotlinx.coroutines.flow.Flow
 
 interface HomeRepositoryContract {
-    fun getAllRemotePokemon()
     fun getAllLocalPokemon(): Flow<Resource<List<Pokemon>>>
     fun getLocalPokemonSize(): Flow<Int>
 }

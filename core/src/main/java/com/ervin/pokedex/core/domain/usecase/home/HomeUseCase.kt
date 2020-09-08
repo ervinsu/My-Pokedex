@@ -6,6 +6,6 @@ import kotlinx.coroutines.flow.Flow
 
 interface HomeUseCase {
     fun getAllLocalPokemon(): Flow<Resource<List<Pokemon>>>
-    fun getAllRemotePokemon()
+    fun maybeFetchRemotePokemon()
     fun getLocalPokemonSize(): Flow<Int>
 }
