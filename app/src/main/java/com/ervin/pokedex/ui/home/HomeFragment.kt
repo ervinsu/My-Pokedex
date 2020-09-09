@@ -25,13 +25,33 @@ class HomeFragment : Fragment() {
             when (it) {
                 is Resource.Success -> {
                     Toast.makeText(activity, "${it.data?.size}", Toast.LENGTH_LONG).show()
-                    Log.d("HMM", "success")
+                    Log.d("HMM", "success ${it.data?.size}")
                 }
                 is Resource.Error -> {
                     Log.d("HMM", "error")
                 }
                 is Resource.Loading -> {
                     Log.d("HMM", "loading")
+                }
+            }
+        })
+
+        homeViewModel.elements.observe(viewLifecycleOwner, Observer {
+            when (it) {
+                is Resource.Success -> {
+                    Toast.makeText(
+                        activity,
+                        "Data Element pokemon already up-to date",
+                        Toast.LENGTH_SHORT
+                    ).show()
+                    homeViewModel.maybeFetchRemotePokemon()
+                    Log.d("HMM", "Type-succes ${it.data}")
+                }
+                is Resource.Loading -> {
+                    Log.d("HMM", "Type-loading")
+                }
+                is Resource.Error -> {
+                    Log.d("HMM", "Type-Error")
                 }
             }
         })

@@ -14,9 +14,11 @@ import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
 import com.ervin.pokedex.core.R
 import com.ervin.pokedex.core.data.source.local.LocalDataSource
+import com.ervin.pokedex.core.data.source.local.entity.foreignkey.PokemonElementEntity
 import com.ervin.pokedex.core.data.source.remote.RemoteDataSource
 import com.ervin.pokedex.core.data.source.remote.network.ApiResponse
 import com.ervin.pokedex.core.util.mappingPokemonApiResponseToLocalResponse
+import com.ervin.pokedex.core.util.mappingPokemonResponseToPokemonElementEntity
 import kotlinx.coroutines.*
 import kotlinx.coroutines.channels.ReceiveChannel
 import kotlinx.coroutines.channels.produce
@@ -79,12 +81,13 @@ class HomeFirstLaunchService : Service() {
             val lastLimitFetch = maxOffset % currLimitPerFetch
 
             val fetchPokemonChannel = produce(CoroutineName("channelPokemon")) {
-                while (count + currLimitPerFetch < maxOffset) {
+                while (count + currLimitPerFetch <= maxOffset) {
                     send(LimitOffsetPokemon(count, currLimitPerFetch))
                     count += currLimitPerFetch
                 }
                 //add to channel for last limit
-                send(LimitOffsetPokemon(count, lastLimitFetch))
+                if (lastLimitFetch != 0)
+                    send(LimitOffsetPokemon(count, lastLimitFetch))
             }
             try {
                 /**
@@ -97,10 +100,10 @@ class HomeFirstLaunchService : Service() {
                         }
                     }
                 }
-            } catch (e: CancellationException) {
+            } catch (e: Exception) {
                 stopSelf()
                 stopForeground(true)
-                Log.d("sss", "dddd $e")
+                Log.d("sss", "dddd ${e.localizedMessage}")
                 parentCoroutineContext.cancel(CancellationException("failed to fetch remote pokemon ${e.localizedMessage}"))
             }
 
@@ -120,25 +123,42 @@ class HomeFirstLaunchService : Service() {
          * So, it's better to still receive it as channel, to wait all of data is added to db then this service can stop
          */
         for (queue in receiveQueuePokemons) {
-            try {
-                remoteDataSource.getAllListPokemon(queue.offset, queue.limit).collect {
-                    when (it) {
-                        is ApiResponse.Success -> {
-                            val convertedApiResult = it.data
-                                .map(::mappingPokemonApiResponseToLocalResponse)
-                            localDataSource.insertAllPokemon(convertedApiResult)
-                        }
-                        is ApiResponse.Empty -> {
-                            //do nothing
-                        }
-                        is ApiResponse.Error -> {
-                            throw CancellationException(it.errorMessage)
-                        }
+            remoteDataSource.getAllListPokemon(queue.offset, queue.limit).collect {
+                when (it) {
+                    is ApiResponse.Success -> {
+                        /**
+                         * add pokemon and composite key to db
+                         */
+                        val listPokemonElementEntity = mutableListOf<PokemonElementEntity>()
+                        val convertedApiPokemonResult = it.data
+                            .map { pokemonResponse ->
+                                /**
+                                 * split the types
+                                 */
+                                listPokemonElementEntity.addAll(
+                                    mappingPokemonResponseToPokemonElementEntity(pokemonResponse)
+                                )
+                                /**
+                                 * return it as List of PokemonEntity
+                                 */
+                                mappingPokemonApiResponseToLocalResponse(pokemonResponse)
+                            }
+
+                        localDataSource.insertAllPokemon(convertedApiPokemonResult)
+                        localDataSource.insertAllPokemonElementFK(
+                            listPokemonElementEntity
+                        )
+
+                    }
+                    is ApiResponse.Empty -> {
+                        //do nothing
+                    }
+                    is ApiResponse.Error -> {
+                        throw CancellationException(it.errorMessage)
                     }
                 }
-            } catch (e: Exception) {
-                throw CancellationException(e.localizedMessage)
             }
+
         }
     }
 

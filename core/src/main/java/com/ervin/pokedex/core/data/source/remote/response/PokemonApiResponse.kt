@@ -23,5 +23,33 @@ data class PokemonResponse(
     val pokemonBaseStats: List<BaseStatResponse>,
 
     @field:SerializedName("types")
-    val pokemonTypes: List<TypeElementResponse>
+    val pokemonTypes: List<Type>
 )
+
+data class Type(
+    @field:SerializedName("type")
+    val type: Type
+) {
+    data class Type(
+        @field:SerializedName("name")
+        val name: String,
+        @field:SerializedName("url")
+        val url: String
+    )
+}
+
+data class SpriteResponse(
+    @field:SerializedName("front_default")
+    val pokemonFrontSpriteUrl: String
+)
+
+data class BaseStatResponse(
+    @field:SerializedName("base_stat")
+    val statValue: Int,
+    val stat: Stat
+) {
+    data class Stat(
+        @field:SerializedName("name")
+        val statName: String
+    )
+}

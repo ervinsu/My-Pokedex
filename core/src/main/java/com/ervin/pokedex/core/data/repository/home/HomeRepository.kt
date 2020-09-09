@@ -3,13 +3,12 @@ package com.ervin.pokedex.core.data.repository.home
 import com.ervin.pokedex.core.data.source.Resource
 import com.ervin.pokedex.core.data.source.local.LocalDataSource
 import com.ervin.pokedex.core.data.source.remote.RemoteDataSource
+import com.ervin.pokedex.core.data.source.remote.network.ApiResponse
 import com.ervin.pokedex.core.domain.model.Pokemon
 import com.ervin.pokedex.core.domain.repository.home.HomeRepositoryContract
+import com.ervin.pokedex.core.util.mappingElementApiResponseToLocalResponse
 import com.ervin.pokedex.core.util.mappingPokemonEntityToDomainModel
-import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.emitAll
-import kotlinx.coroutines.flow.flow
-import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.flow.*
 
 class HomeRepository(
     private val remoteDataSource: RemoteDataSource,
@@ -22,15 +21,48 @@ class HomeRepository(
             /**
              * get the local db data and return it to view
              */
-            emitAll(
-                localDataSource
-                    .getAllPokemon()
-                    .map {
-                        Resource.Success(mappingPokemonEntityToDomainModel(it))
-                    }
-            )
+            try {
+                emitAll(
+                    localDataSource
+                        .getAllPokemon()
+                        .map {
+                            Resource.Success(mappingPokemonEntityToDomainModel(it))
+                        }
+                )
+            } catch (e: Exception) {
+                Resource.Error<List<Pokemon>>("")
+            }
         }
 
     override fun getLocalPokemonSize(): Flow<Int> = localDataSource.getSizeDBPokemon()
+
+    override fun maybeGetRemoteElement() =
+        flow {
+            emit(Resource.Loading())
+            val localElementSize = localDataSource.getSizeDBElement().first()
+            if (localElementSize == 0) {
+                val remoteElementResponse = remoteDataSource.getAllListElement()
+                remoteElementResponse.collect { response ->
+                    when (response) {
+                        is ApiResponse.Success -> {
+                            val mappedElements = response.data
+                                .map(::mappingElementApiResponseToLocalResponse)
+                            localDataSource.insertAllElement(mappedElements)
+                            emit(Resource.Success(mappedElements.size))
+                        }
+                        is ApiResponse.Empty -> {
+                            emit(Resource.Error("Empty Data", 0))
+                        }
+                        is ApiResponse.Error -> {
+                            emit(Resource.Error("Error Fetch ${response.errorMessage}", 0))
+                        }
+                    }
+                }
+            } else {
+                emit(Resource.Success(localElementSize))
+            }
+        }.catch {
+            emit(Resource.Error("Error ${it.localizedMessage}"))
+        }
 
 }

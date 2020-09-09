@@ -37,5 +37,8 @@ class HomeInteractor(
         }
     }
 
+    override fun maybeFetchRemoteElement(): Flow<Resource<Int>> =
+        homeRepository.maybeGetRemoteElement()
+
     override fun getLocalPokemonSize(): Flow<Int> = homeRepository.getLocalPokemonSize()
 }
