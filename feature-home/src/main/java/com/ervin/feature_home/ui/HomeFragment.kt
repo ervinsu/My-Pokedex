@@ -1,4 +1,4 @@
-package com.ervin.pokedex.ui.home
+package com.ervin.feature_home.ui
 
 import android.os.Bundle
 import android.util.Log
@@ -8,7 +8,7 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
-import com.ervin.pokedex.R
+import com.ervin.feature_home.R
 import com.ervin.pokedex.core.data.source.Resource
 import org.koin.android.viewmodel.ext.android.viewModel
 

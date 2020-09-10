@@ -1,4 +1,4 @@
-package com.ervin.pokedex.core.di
+package com.ervin.pokedex.di.sharedmodule
 
 import com.ervin.pokedex.core.data.source.remote.network.detail.DetailApiService
 import org.koin.core.qualifier.named

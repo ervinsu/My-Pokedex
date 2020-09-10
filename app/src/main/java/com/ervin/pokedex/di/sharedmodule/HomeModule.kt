@@ -1,4 +1,4 @@
-package com.ervin.pokedex.core.di
+package com.ervin.pokedex.di.sharedmodule
 
 import com.ervin.pokedex.core.data.repository.home.HomeRepository
 import com.ervin.pokedex.core.data.source.remote.network.home.HomeApiService

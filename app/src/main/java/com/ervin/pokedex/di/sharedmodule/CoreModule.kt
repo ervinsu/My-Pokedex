@@ -1,4 +1,4 @@
-package com.ervin.pokedex.core.di
+package com.ervin.pokedex.di.sharedmodule
 
 import androidx.room.Room
 import com.ervin.pokedex.core.data.source.local.LocalDataSource

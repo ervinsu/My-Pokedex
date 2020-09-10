@@ -1,3 +1,5 @@
+include ':feature-home'
+include ':feature-homepage'
 include ':core'
 include ':app'
 rootProject.name = "My-Pokedex"

@@ -1,4 +1,4 @@
-package com.ervin.pokedex.ui.home
+package com.ervin.feature_home.ui
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
