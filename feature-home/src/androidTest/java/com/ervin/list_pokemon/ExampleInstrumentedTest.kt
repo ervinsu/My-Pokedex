@@ -1,4 +1,4 @@
-package com.ervin.feature_home
+package com.ervin.list_pokemon
 
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.platform.app.InstrumentationRegistry

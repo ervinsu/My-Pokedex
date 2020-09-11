@@ -55,7 +55,6 @@ dependencies {
     //retrofit
     implementation libs.retrofit2.retrofit
     implementation libs.retrofit2.gson
-    implementation libs.retrofit2.retrofitRxJava2
 
     //chuck see API call
     implementation libs.chuck

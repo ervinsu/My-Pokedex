@@ -1,6 +1,8 @@
 package com.ervin.pokedex.di
 
-import com.ervin.feature_home.ui.HomeViewModel
+import com.ervin.list_pokemon.adapter.ListPokemonAdapter
+import com.ervin.list_pokemon.ui.ListPokemonFragment
+import com.ervin.list_pokemon.ui.ListPokemonViewModel
 import com.ervin.pokedex.core.data.source.local.LocalDataSource
 import com.ervin.pokedex.core.data.source.remote.RemoteDataSource
 import com.ervin.pokedex.core.domain.backgroundservice.HomeFirstLaunchService
@@ -18,7 +20,7 @@ val useCaseModules = module {
 }
 
 val viewModelModules = module {
-    viewModel { HomeViewModel(get()) }
+    viewModel { ListPokemonViewModel(get()) }
 }
 
 @ExperimentalCoroutinesApi
@@ -29,6 +31,14 @@ val firstLaunchServiceModule = module {
         }
         scoped<RemoteDataSource> {
             get()
+        }
+    }
+}
+
+val listPokemonModule = module {
+    scope(named<ListPokemonFragment>()) {
+        scoped {
+            ListPokemonAdapter()
         }
     }
 }

@@ -15,6 +15,7 @@
             <option value="$PROJECT_DIR$/core" />
             <option value="$PROJECT_DIR$/feature-home" />
             <option value="$PROJECT_DIR$/feature-homepage" />
+            <option value="$PROJECT_DIR$/library-common" />
           </set>
         </option>
         <option name="resolveModulePerSourceSet" value="false" />

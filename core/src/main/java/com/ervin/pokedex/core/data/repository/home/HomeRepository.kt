@@ -1,5 +1,7 @@
 package com.ervin.pokedex.core.data.repository.home
 
+import android.util.Log
+import androidx.paging.PagedList
 import com.ervin.pokedex.core.data.source.Resource
 import com.ervin.pokedex.core.data.source.local.LocalDataSource
 import com.ervin.pokedex.core.data.source.remote.RemoteDataSource
@@ -7,7 +9,6 @@ import com.ervin.pokedex.core.data.source.remote.network.ApiResponse
 import com.ervin.pokedex.core.domain.model.Pokemon
 import com.ervin.pokedex.core.domain.repository.home.HomeRepositoryContract
 import com.ervin.pokedex.core.util.mappingElementApiResponseToLocalResponse
-import com.ervin.pokedex.core.util.mappingPokemonEntityToDomainModel
 import kotlinx.coroutines.flow.*
 
 class HomeRepository(
@@ -15,22 +16,23 @@ class HomeRepository(
     private val localDataSource: LocalDataSource
 ) : HomeRepositoryContract {
 
-    override fun getAllLocalPokemon(): Flow<Resource<List<Pokemon>>> =
+    override fun getAllLocalPokemon(): Flow<Resource<PagedList<Pokemon>>> =
         flow {
             emit(Resource.Loading())
             /**
              * get the local db data and return it to view
              */
             try {
-                emitAll(
-                    localDataSource
-                        .getAllPokemon()
-                        .map {
-                            Resource.Success(mappingPokemonEntityToDomainModel(it))
-                        }
-                )
+                val data = localDataSource.getAllPokemon().first()
+                if (data.isNullOrEmpty()) {
+                    emit(Resource.Error("EMPTY"))
+                } else {
+                    emit(Resource.Success(data))
+                }
             } catch (e: Exception) {
-                Resource.Error<List<Pokemon>>("")
+                Log.d("hmm", "$e repository level")
+
+                emit(Resource.Error("$e repository level"))
             }
         }
 

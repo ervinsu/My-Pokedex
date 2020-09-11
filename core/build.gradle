@@ -24,12 +24,9 @@ dependencies {
     //retrofit
     implementation libs.retrofit2.retrofit
     implementation libs.retrofit2.gson
-    implementation libs.retrofit2.retrofitRxJava2
 
     //koin
-    api libs.koin.android
     api libs.koin.viewmodel
-    api libs.koin.scope
 
     //room
     implementation libs.androidx.room
@@ -44,4 +41,7 @@ dependencies {
     api libs.androidx.livedata
     api libs.androidx.lifecycle
 
+    // Dependencies for Paging
+    ext.paging_version = '2.1.2'
+    implementation "androidx.paging:paging-runtime-ktx:$paging_version"
 }

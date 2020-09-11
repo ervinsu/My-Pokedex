@@ -3,6 +3,7 @@ package com.ervin.pokedex.core.domain.usecase.home
 import android.content.Context
 import android.content.Intent
 import android.os.Build
+import androidx.paging.PagedList
 import com.ervin.pokedex.core.data.source.Resource
 import com.ervin.pokedex.core.domain.backgroundservice.HomeFirstLaunchService
 import com.ervin.pokedex.core.domain.model.Pokemon
@@ -19,7 +20,7 @@ class HomeInteractor(
     private val homeRepository: HomeRepositoryContract,
     private val context: Context
 ) : HomeUseCase {
-    override fun getAllLocalPokemon(): Flow<Resource<List<Pokemon>>> =
+    override fun getAllLocalPokemon(): Flow<Resource<PagedList<Pokemon>>> =
         homeRepository.getAllLocalPokemon()
 
     override fun maybeFetchRemotePokemon() {

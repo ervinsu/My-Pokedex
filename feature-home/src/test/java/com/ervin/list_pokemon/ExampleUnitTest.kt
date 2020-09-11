@@ -1,4 +1,4 @@
-package com.ervin.feature_home
+package com.ervin.list_pokemon
 
 import org.junit.Assert.assertEquals
 import org.junit.Test

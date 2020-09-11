@@ -1,3 +1,4 @@
+include ':library-common'
 include ':feature-home'
 include ':feature-homepage'
 include ':core'

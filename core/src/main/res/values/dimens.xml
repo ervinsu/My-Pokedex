@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="width_row">180dp</dimen>
+    <dimen name="image_inDp">160dp</dimen>
+    <!--    <dimen name="image_detail_inDp">140dp</dimen>-->
+    <dimen name="textSize">16sp</dimen>
+    <!--    <dimen name="button_radius_large">16</dimen>-->
+</resources>

@@ -9,23 +9,15 @@ android {
     defaultConfig {
         minSdkVersion androidVersion.minSdkVersion
         targetSdkVersion androidVersion.targetSdkVersion
-        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
-
     }
 }
 
 dependencies {
-    implementation fileTree(dir: "libs", include: ["*.jar"])
-    implementation project(":core")
-    implementation project(":library-common")
-    implementation libs.kotlinStdlibJdk8
-
-    // Dependencies for Paging
-    ext.paging_version = '2.1.2'
-    implementation "androidx.paging:paging-runtime-ktx:$paging_version"
+    api libs.androidx.viewmodel
+    api libs.androidx.recyclerview
 
     testImplementation 'junit:junit:4.13'
     androidTestImplementation 'androidx.test.ext:junit:1.1.2'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
-    androidTestImplementation 'androidx.annotation:annotation:1.1.0'
+
 }
