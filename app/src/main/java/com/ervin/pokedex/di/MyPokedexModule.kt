@@ -1,8 +1,8 @@
 package com.ervin.pokedex.di
 
-import com.ervin.list_pokemon.adapter.ListPokemonAdapter
 import com.ervin.list_pokemon.ui.ListPokemonFragment
 import com.ervin.list_pokemon.ui.ListPokemonViewModel
+import com.ervin.list_pokemon.ui.adapter.ListPokemonAdapter
 import com.ervin.pokedex.core.data.source.local.LocalDataSource
 import com.ervin.pokedex.core.data.source.remote.RemoteDataSource
 import com.ervin.pokedex.core.domain.backgroundservice.HomeFirstLaunchService

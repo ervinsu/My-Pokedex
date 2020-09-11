@@ -11,7 +11,7 @@ import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.GridLayoutManager
 import com.ervin.library_common.util.calculateNoOfColumn
 import com.ervin.list_pokemon.R
-import com.ervin.list_pokemon.adapter.ListPokemonAdapter
+import com.ervin.list_pokemon.ui.adapter.ListPokemonAdapter
 import com.ervin.pokedex.core.data.source.Resource
 import kotlinx.android.synthetic.main.fragment_home.view.*
 import org.koin.android.scope.currentScope
@@ -35,11 +35,14 @@ class ListPokemonFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        Log.d("asda", "asdad")
         listPokemonViewModel.pokemons.observe(viewLifecycleOwner, Observer {
             when (it) {
                 is Resource.Success -> {
-                    adapter.submitList(it.data)
+                    if (it.data.isNullOrEmpty()) {
+                        Toast.makeText(activity, "Data Not Found", Toast.LENGTH_SHORT).show()
+                    } else {
+                        adapter.setListPokemon(it.data!!)
+                    }
                     Log.d("HMM", "success ${it.data?.size}")
                 }
                 is Resource.Error -> {

@@ -3,14 +3,13 @@ package com.ervin.list_pokemon.ui
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.asLiveData
-import androidx.paging.PagedList
 import com.ervin.pokedex.core.data.source.Resource
 import com.ervin.pokedex.core.domain.model.Pokemon
 import com.ervin.pokedex.core.domain.usecase.home.HomeUseCase
 
 class ListPokemonViewModel(private val homeUseCase: HomeUseCase) : ViewModel() {
 
-    private val _pokemons: LiveData<Resource<PagedList<Pokemon>>> =
+    private val _pokemons: LiveData<Resource<List<Pokemon>>> =
         homeUseCase.getAllLocalPokemon().asLiveData()
     private val _elements: LiveData<Resource<Int>> =
         homeUseCase.maybeFetchRemoteElement().asLiveData()
