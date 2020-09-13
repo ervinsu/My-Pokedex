@@ -7,6 +7,7 @@ import com.ervin.pokedex.core.data.source.local.response.PokemonLocalResponse
 import com.ervin.pokedex.core.data.source.remote.response.ListElementApiResponse
 import com.ervin.pokedex.core.data.source.remote.response.PokemonResponse
 import com.ervin.pokedex.core.domain.model.Pokemon
+import com.ervin.pokedex.core.domain.model.Type
 
 fun mappingPokemonApiResponseToLocalResponse(pokemon: PokemonResponse) =
     PokemonEntity(
@@ -32,7 +33,27 @@ fun mappingPokemonEntityToDomainModel(listPokemon: List<PokemonLocalResponse>): 
     listPokemon.map { pokemon ->
         Pokemon(
             pokemonId = pokemon.pokemonEntity.pokemonId,
-            pokemonName = pokemon.pokemonEntity.pokemonName
+            pokemonName = pokemon.pokemonEntity.pokemonName,
+            pokemonSpritesUrl = pokemon.pokemonEntity.pokemonSpritesUrl,
+            pokemonAttack = pokemon.pokemonEntity.attack,
+            pokemonDefense = pokemon.pokemonEntity.defense,
+            pokemonSpAtk = pokemon.pokemonEntity.specialAttack,
+            pokemonSpDef = pokemon.pokemonEntity.specialDefense,
+            isFavorite = pokemon.pokemonEntity.isFavorite,
+            listType = mappingElementEntityToDomainModel(pokemon.typeList),
+            pokemonHeight = pokemon.pokemonEntity.height,
+            pokemonHp = pokemon.pokemonEntity.hp,
+            pokemonSpeed = pokemon.pokemonEntity.speed,
+            pokemonWeight = pokemon.pokemonEntity.weight
+        )
+    }
+
+fun mappingElementEntityToDomainModel(listType: List<ElementEntity>) =
+    listType.map {
+        Type(
+            typeId = it.typeId,
+            typeColor = it.typeColor,
+            typeName = it.typeName
         )
     }
 

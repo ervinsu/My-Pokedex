@@ -54,7 +54,7 @@ class HomeFirstLaunchService : Service() {
         }
         val builder = build.apply {
             setOngoing(true)
-            setSmallIcon(R.drawable.ic_menu_camera)
+            setSmallIcon(R.drawable.ic_logo)
             setContentTitle("Data Loading")
             setProgress(0, 0, true)
         }

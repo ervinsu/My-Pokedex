@@ -24,7 +24,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <androidx.cardview.widget.CardView
+        <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/poke_container"
             android:layout_width="match_parent"
             android:layout_height="@dimen/image_inDp"
@@ -35,7 +35,7 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/pokeName"
+            android:id="@+id/poke_name"
             android:layout_width="0sp"
             android:layout_height="wrap_content"
             android:paddingBottom="10sp"

@@ -14,27 +14,27 @@ import com.ervin.list_pokemon.R
 import com.ervin.list_pokemon.ui.adapter.ListPokemonAdapter
 import com.ervin.pokedex.core.data.source.Resource
 import kotlinx.android.synthetic.main.fragment_home.view.*
-import org.koin.android.scope.currentScope
+import org.koin.android.scope.lifecycleScope
 import org.koin.android.viewmodel.ext.android.viewModel
 
 class ListPokemonFragment : Fragment() {
 
     private val listPokemonViewModel: ListPokemonViewModel by viewModel()
-    private val adapter: ListPokemonAdapter by currentScope.inject()
+    private val adapter: ListPokemonAdapter by lifecycleScope.inject()
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val view = inflater.inflate(R.layout.fragment_home, container, false)
-        view.initRecyclerview()
-
-        return view
+        return inflater.inflate(R.layout.fragment_home, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        if (activity == null) return
+        view.initRecyclerview()
+
         listPokemonViewModel.pokemons.observe(viewLifecycleOwner, Observer {
             when (it) {
                 is Resource.Success -> {

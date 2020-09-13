@@ -1,10 +1,12 @@
 package com.ervin.list_pokemon.ui.adapter
 
+import android.graphics.Color
+import android.graphics.drawable.GradientDrawable
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.ervin.library_common.base.BaseViewHolder
+import com.ervin.library_common.extension.loadImage
 import com.ervin.list_pokemon.R
 import com.ervin.pokedex.core.domain.model.Pokemon
 import kotlinx.android.synthetic.main.home_view_item.view.*
@@ -19,9 +21,7 @@ class ListPokemonAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
-        return ListPokemonViewHolder(
-            LayoutInflater.from(parent.context).inflate(R.layout.home_view_item, parent, false)
-        )
+        return ListPokemonViewHolder(parent)
     }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
@@ -31,9 +31,25 @@ class ListPokemonAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     override fun getItemCount(): Int = listPokemon.size
 
-    class ListPokemonViewHolder(view: View) : BaseViewHolder(view) {
+    class ListPokemonViewHolder(parent: ViewGroup) : BaseViewHolder(
+        LayoutInflater.from(parent.context).inflate(R.layout.home_view_item, parent, false)
+    ) {
         fun bind(pokemon: Pokemon) {
-            itemView.pokeName.text = pokemon.pokemonName
+            itemView.poke_name.text = pokemon.pokemonName
+            itemView.iv_poke_picture.loadImage(pokemon.pokemonSpritesUrl)
+            val arrayColorTypes = IntArray(2)
+            pokemon.listType.mapIndexed { position, type ->
+                arrayColorTypes[position] =
+                    Color.parseColor(type.typeColor)
+                if (pokemon.listType.size == 1) {
+                    arrayColorTypes[1] =
+                        Color.parseColor(pokemon.listType[0].typeColor)
+                }
+            }
+
+            val gd = GradientDrawable(GradientDrawable.Orientation.LEFT_RIGHT, arrayColorTypes)
+            gd.cornerRadius = 0f
+            itemView.poke_container.background = gd
         }
     }
 }
