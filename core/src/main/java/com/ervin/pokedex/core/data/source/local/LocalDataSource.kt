@@ -15,6 +15,9 @@ class LocalDataSource(private val dao: PokemonDao) {
 
     fun getSizeDBElement() = dao.getSizeElement()
 
+    suspend fun updateFavoritePokemon(pokemon: PokemonEntity) =
+        dao.updatePokemon(pokemon)
+
     suspend fun insertAllPokemon(listPokemon: List<PokemonEntity>) =
         dao.insertAllPokemon(listPokemon)
 

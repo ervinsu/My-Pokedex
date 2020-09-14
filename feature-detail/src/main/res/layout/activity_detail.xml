@@ -301,47 +301,18 @@
                 app:layout_constraintTop_toTopOf="@id/poke_sp_defense"
                 tools:text="70" />
 
-            <TextView
-                android:id="@+id/profile"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="24sp"
-                android:layout_marginTop="24sp"
-                android:layout_marginEnd="16sp"
-                android:text="@string/profile"
-                android:textColor="?attr/colorOnBackground"
-                android:textSize="24sp"
-                android:textStyle="bold"
-                app:layout_constraintEnd_toStartOf="@id/poke_sp_defense"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/poke_sp_defense" />
-
-            <TextView
-                android:id="@+id/tv_profile_pokemon"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="32sp"
-                android:layout_marginEnd="32sp"
-                android:textColor="?attr/colorOnBackground"
-                android:textSize="16sp"
-                android:textStyle="bold"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/profile"
-                tools:text="ini profilenya" />
-
             <LinearLayout
                 android:id="@+id/poke_weight"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="24sp"
-                android:layout_marginTop="16sp"
+                android:layout_marginTop="30sp"
                 android:orientation="horizontal"
                 android:text=""
                 android:weightSum="2"
                 app:layout_constraintEnd_toStartOf="@id/poke_height"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/tv_profile_pokemon">
+                app:layout_constraintTop_toBottomOf="@id/poke_sp_defense">
 
                 <TextView
                     android:layout_width="0dp"
@@ -366,12 +337,12 @@
                 android:id="@+id/poke_height"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="16sp"
+                android:layout_marginTop="30sp"
                 android:layout_marginEnd="24sp"
                 android:orientation="horizontal"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@id/poke_weight"
-                app:layout_constraintTop_toBottomOf="@id/tv_profile_pokemon">
+                app:layout_constraintTop_toBottomOf="@id/tv_poke_sp_defense">
 
                 <TextView
                     android:layout_width="0dp"
@@ -399,7 +370,7 @@
     <LinearLayout
         android:id="@+id/poke_container"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
+        android:layout_height="match_parent"
         android:elevation="-2dp"
         android:orientation="horizontal"
         android:transitionName="pokeContainer"
@@ -411,7 +382,7 @@
     <LinearLayout
         android:id="@+id/bg_detail"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
+        android:layout_height="match_parent"
         android:layout_marginStart="16sp"
         android:layout_marginEnd="16sp"
         android:background="?android:attr/colorBackground"
@@ -422,5 +393,15 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/detail_toolbar" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fab_bookmark"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="24dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:srcCompat="@drawable/ic_bookmark" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

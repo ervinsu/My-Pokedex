@@ -7,6 +7,7 @@
         <item name="colorOnPrimary">@color/onPrimary</item>
         <item name="android:colorBackground">@color/background</item>
         <item name="colorOnBackground">@color/onBackground</item>
+        <item name="android:textColorSecondary">@color/onPrimarySecondary</item>
         <item name="android:windowContentTransitions">true</item>
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>

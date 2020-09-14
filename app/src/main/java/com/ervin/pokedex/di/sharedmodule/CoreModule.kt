@@ -4,7 +4,9 @@ import androidx.room.Room
 import com.ervin.pokedex.core.data.source.local.LocalDataSource
 import com.ervin.pokedex.core.data.source.local.room.PokemonDatabase
 import com.ervin.pokedex.core.data.source.remote.RemoteDataSource
+import com.ervin.pokedex.core.domain.backgroundservice.HomeFirstLaunchService
 import com.readystatesoftware.chuck.ChuckInterceptor
+import kotlinx.coroutines.ExperimentalCoroutinesApi
 import okhttp3.OkHttpClient
 import org.koin.android.ext.koin.androidContext
 import org.koin.core.qualifier.named
@@ -21,6 +23,8 @@ val localModule = module {
             PokemonDatabase::class.java, "Pokedex.db"
         ).fallbackToDestructiveMigration().build()
     }
+
+    single { LocalDataSource(get()) }
 }
 
 val remoteModule = module {
@@ -38,9 +42,24 @@ val remoteModule = module {
             .client(get())
             .build()
     }
-}
-
-val coreModule = module {
-    single { LocalDataSource(get()) }
     single { RemoteDataSource(get(), get()) }
 }
+
+@ExperimentalCoroutinesApi
+val firstLaunchServiceModule = module {
+    scope(named<HomeFirstLaunchService>()) {
+        scoped<LocalDataSource> {
+            get()
+        }
+        scoped<RemoteDataSource> {
+            get()
+        }
+    }
+}
+
+@ExperimentalCoroutinesApi
+val coreModule = listOf(
+    localModule,
+    remoteModule,
+    firstLaunchServiceModule
+)

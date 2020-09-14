@@ -1,4 +1,4 @@
-package com.ervin.pokedex.core.domain.repository.home
+package com.ervin.pokedex.core.domain.repository
 
 import com.ervin.pokedex.core.data.source.Resource
 import com.ervin.pokedex.core.domain.model.Pokemon

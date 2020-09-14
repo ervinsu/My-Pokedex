@@ -18,6 +18,7 @@ import com.ervin.library_common.extension.onClick
 import com.ervin.library_common.navigation.FeatureDetail
 import com.ervin.list_pokemon.R
 import com.ervin.pokedex.core.domain.model.Pokemon
+import kotlinx.android.synthetic.main.fragment_home.bg_detail
 import kotlinx.android.synthetic.main.home_view_item.view.iv_poke_picture
 import kotlinx.android.synthetic.main.home_view_item.view.poke_container
 import kotlinx.android.synthetic.main.home_view_item.view.poke_name
@@ -55,7 +56,7 @@ class ListPokemonAdapter :
              */
             val pPokePicture = Pair.create<View, String>(view.iv_poke_picture, "pokePicture")
             val pPokeContainer = Pair.create(view.poke_container as View, "pokeContainer")
-            val pBgDetail = Pair.create(view.poke_container as View, "bgDetail")
+            val pBgDetail = Pair.create((view.context as Activity).bg_detail as View, "bgDetail")
             val options = ActivityOptionsCompat.makeSceneTransitionAnimation(
                 activity,
                 pPokeContainer,

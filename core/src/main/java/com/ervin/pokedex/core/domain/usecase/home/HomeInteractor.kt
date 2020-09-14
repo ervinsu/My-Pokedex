@@ -6,7 +6,7 @@ import android.os.Build
 import com.ervin.pokedex.core.data.source.Resource
 import com.ervin.pokedex.core.domain.backgroundservice.HomeFirstLaunchService
 import com.ervin.pokedex.core.domain.model.Pokemon
-import com.ervin.pokedex.core.domain.repository.home.HomeRepositoryContract
+import com.ervin.pokedex.core.domain.repository.HomeRepositoryContract
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi

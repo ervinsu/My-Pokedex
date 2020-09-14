@@ -8,6 +8,7 @@ import com.ervin.pokedex.core.data.source.remote.response.ListElementApiResponse
 import com.ervin.pokedex.core.data.source.remote.response.PokemonResponse
 import com.ervin.pokedex.core.domain.model.Pokemon
 import com.ervin.pokedex.core.domain.model.Type
+import java.util.Locale
 
 fun mappingPokemonApiResponseToLocalResponse(pokemon: PokemonResponse) =
     PokemonEntity(
@@ -33,7 +34,7 @@ fun mappingPokemonEntityToDomainModel(listPokemon: List<PokemonLocalResponse>): 
     listPokemon.map { pokemon ->
         Pokemon(
             pokemonId = pokemon.pokemonEntity.pokemonId,
-            pokemonName = pokemon.pokemonEntity.pokemonName,
+            pokemonName = pokemon.pokemonEntity.pokemonName.capitalize(Locale.getDefault()),
             pokemonSpritesUrl = pokemon.pokemonEntity.pokemonSpritesUrl,
             pokemonAttack = pokemon.pokemonEntity.attack,
             pokemonDefense = pokemon.pokemonEntity.defense,
@@ -82,4 +83,20 @@ fun mappingElementApiResponseToLocalResponse(element: ListElementApiResponse.Res
             "fairy" -> "#D685AD"
             else -> "#"
         }
+    )
+
+fun Pokemon.mappingPokemonDomainModelToEntity() =
+    PokemonEntity(
+        pokemonId,
+        pokemonName,
+        pokemonSpritesUrl,
+        pokemonSpeed,
+        pokemonSpDef,
+        pokemonSpAtk,
+        pokemonDefense,
+        pokemonAttack,
+        pokemonHp,
+        pokemonWeight,
+        pokemonHeight,
+        isFavorite
     )

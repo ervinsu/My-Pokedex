@@ -17,5 +17,5 @@ data class Pokemon(
     val pokemonWeight: Int,
     val pokemonHeight: Int,
     val listType: List<Type>,
-    val isFavorite: Boolean = false
+    var isFavorite: Boolean = false
 ) : Parcelable
