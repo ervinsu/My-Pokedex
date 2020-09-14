@@ -1,0 +1,426 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.DetailActivity">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/detail_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/detail_toolbar">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/iv_poke_picture"
+                android:layout_width="@dimen/image_detail_inDp"
+                android:layout_height="@dimen/image_detail_inDp"
+                android:layout_marginStart="16sp"
+                android:layout_marginTop="24sp"
+                android:layout_marginEnd="16sp"
+                android:elevation="5dp"
+                android:transitionName="pokePicture"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/poke_id"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8sp"
+                android:layout_marginEnd="32sp"
+                android:textColor="?attr/colorOnBackground"
+                android:textSize="24sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:ignore="RtlSymmetry"
+                tools:text="#id" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tv_type_name1"
+                android:layout_width="0sp"
+                android:layout_height="wrap_content"
+                android:padding="4sp"
+                android:textAlignment="center"
+                android:textColor="?colorOnBackground"
+                android:textSize="18sp"
+                app:layout_constraintBottom_toTopOf="@id/poke_hp"
+                app:layout_constraintStart_toEndOf="@id/iv_poke_picture"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="type1" />
+
+            <TextView
+                android:id="@+id/tv_type_name2"
+                android:layout_width="0sp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8sp"
+                android:padding="4sp"
+                android:textAlignment="center"
+                android:textColor="?attr/colorOnBackground"
+                android:textSize="18sp"
+                app:layout_constraintBottom_toTopOf="@id/poke_hp"
+                app:layout_constraintStart_toEndOf="@id/tv_type_name1"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="type2" />
+
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rv_poke_type"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_marginStart="8sp"
+                android:layout_marginEnd="8sp"
+                app:layout_constraintEnd_toStartOf="@id/poke_id"
+                app:layout_constraintStart_toEndOf="@id/iv_poke_picture"
+                app:layout_constraintTop_toTopOf="@id/iv_poke_picture" />
+
+            <TextView
+                android:id="@+id/poke_hp"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20sp"
+                android:text="@string/hp"
+                android:textColor="?attr/colorOnBackground"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="@id/rv_poke_type"
+                app:layout_constraintTop_toBottomOf="@id/rv_poke_type" />
+
+            <ProgressBar
+                android:id="@+id/progressbar_hp"
+                style="@style/CustomProgressBarHorizontal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:indeterminate="false"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/poke_hp"
+                app:layout_constraintTop_toTopOf="@id/poke_hp" />
+
+            <TextView
+                android:id="@+id/tv_poke_hp"
+                style="?android:attr/progressBarStyleHorizontal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:minWidth="100sp"
+                android:paddingStart="8sp"
+                android:paddingEnd="8sp"
+                android:textColor="?attr/colorOnBackground"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/poke_hp"
+                app:layout_constraintTop_toTopOf="@id/poke_hp"
+                tools:text="70" />
+
+            <TextView
+                android:id="@+id/poke_attack"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10sp"
+                android:text="@string/attack"
+                android:textColor="?attr/colorOnBackground"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="@id/rv_poke_type"
+                app:layout_constraintTop_toBottomOf="@id/poke_hp" />
+
+            <ProgressBar
+                android:id="@+id/progressbar_attack"
+                style="@style/CustomProgressBarHorizontal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:indeterminate="false"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/poke_hp"
+                app:layout_constraintTop_toTopOf="@id/poke_attack" />
+
+            <TextView
+                android:id="@+id/tv_poke_attack"
+                style="?android:attr/progressBarStyleHorizontal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:minWidth="100sp"
+                android:paddingStart="8sp"
+                android:paddingEnd="8sp"
+                android:textColor="?attr/colorOnBackground"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/poke_hp"
+                app:layout_constraintTop_toTopOf="@id/poke_attack"
+                tools:text="70" />
+
+            <TextView
+                android:id="@+id/poke_defense"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10sp"
+                android:text="@string/defense"
+                android:textColor="?attr/colorOnBackground"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="@id/rv_poke_type"
+                app:layout_constraintTop_toBottomOf="@id/poke_attack" />
+
+            <ProgressBar
+                android:id="@+id/progressbar_defense"
+                style="@style/CustomProgressBarHorizontal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:indeterminate="false"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/poke_hp"
+                app:layout_constraintTop_toTopOf="@id/poke_defense" />
+
+            <TextView
+                android:id="@+id/tv_poke_defense"
+                style="?android:attr/progressBarStyleHorizontal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:minWidth="100sp"
+                android:paddingStart="8sp"
+                android:paddingEnd="8sp"
+                android:textColor="?attr/colorOnBackground"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/poke_hp"
+                app:layout_constraintTop_toTopOf="@id/poke_defense"
+                tools:text="70" />
+
+            <TextView
+                android:id="@+id/poke_speed"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10sp"
+                android:text="@string/speed"
+                android:textColor="?attr/colorOnBackground"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="@id/rv_poke_type"
+                app:layout_constraintTop_toBottomOf="@id/poke_defense" />
+
+            <ProgressBar
+                android:id="@+id/progressbar_speed"
+                style="@style/CustomProgressBarHorizontal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:indeterminate="false"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/poke_hp"
+                app:layout_constraintTop_toTopOf="@id/poke_speed" />
+
+            <TextView
+                android:id="@+id/tv_poke_speed"
+                style="?android:attr/progressBarStyleHorizontal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:minWidth="100sp"
+                android:paddingStart="8sp"
+                android:paddingEnd="8sp"
+                android:textColor="?attr/colorOnBackground"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/poke_hp"
+                app:layout_constraintTop_toTopOf="@id/poke_speed"
+                tools:text="70" />
+
+            <TextView
+                android:id="@+id/poke_sp_attack"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10sp"
+                android:text="@string/sp_attack"
+                android:textColor="?attr/colorOnBackground"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="@id/rv_poke_type"
+                app:layout_constraintTop_toBottomOf="@id/poke_speed" />
+
+            <ProgressBar
+                android:id="@+id/progressbar_sp_attack"
+                style="@style/CustomProgressBarHorizontal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:indeterminate="false"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/poke_hp"
+                app:layout_constraintTop_toTopOf="@id/poke_sp_attack" />
+
+            <TextView
+                android:id="@+id/tv_poke_sp_attack"
+                style="?android:attr/progressBarStyleHorizontal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:minWidth="100sp"
+                android:paddingStart="8sp"
+                android:paddingEnd="8sp"
+                android:textColor="?attr/colorOnBackground"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/poke_hp"
+                app:layout_constraintTop_toTopOf="@id/poke_sp_attack"
+                tools:text="70" />
+
+            <TextView
+                android:id="@+id/poke_sp_defense"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10sp"
+                android:text="@string/sp_defense"
+                android:textColor="?attr/colorOnBackground"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="@id/rv_poke_type"
+                app:layout_constraintTop_toBottomOf="@id/poke_sp_attack" />
+
+            <ProgressBar
+                android:id="@+id/progressbar_sp_defense"
+                style="@style/CustomProgressBarHorizontal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:indeterminate="false"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/poke_hp"
+                app:layout_constraintTop_toTopOf="@id/poke_sp_defense" />
+
+            <TextView
+                android:id="@+id/tv_poke_sp_defense"
+                style="?android:attr/progressBarStyleHorizontal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:minWidth="100sp"
+                android:paddingStart="8sp"
+                android:paddingEnd="8sp"
+                android:textColor="?attr/colorOnBackground"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/poke_hp"
+                app:layout_constraintTop_toTopOf="@id/poke_sp_defense"
+                tools:text="70" />
+
+            <TextView
+                android:id="@+id/profile"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="24sp"
+                android:layout_marginTop="24sp"
+                android:layout_marginEnd="16sp"
+                android:text="@string/profile"
+                android:textColor="?attr/colorOnBackground"
+                android:textSize="24sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toStartOf="@id/poke_sp_defense"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/poke_sp_defense" />
+
+            <TextView
+                android:id="@+id/tv_profile_pokemon"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="32sp"
+                android:layout_marginEnd="32sp"
+                android:textColor="?attr/colorOnBackground"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/profile"
+                tools:text="ini profilenya" />
+
+            <LinearLayout
+                android:id="@+id/poke_weight"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="24sp"
+                android:layout_marginTop="16sp"
+                android:orientation="horizontal"
+                android:text=""
+                android:weightSum="2"
+                app:layout_constraintEnd_toStartOf="@id/poke_height"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tv_profile_pokemon">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/weight"
+                    android:textColor="?attr/colorOnBackground"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/tv_weight"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:textColor="?attr/colorOnBackground"
+                    android:textSize="16sp"
+                    tools:text="0.5kg" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/poke_height"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16sp"
+                android:layout_marginEnd="24sp"
+                android:orientation="horizontal"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/poke_weight"
+                app:layout_constraintTop_toBottomOf="@id/tv_profile_pokemon">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/height"
+                    android:textColor="?attr/colorOnBackground"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/tv_height"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:textColor="?attr/colorOnBackground"
+                    android:textSize="16sp"
+                    tools:text="0.5m" />
+            </LinearLayout>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.core.widget.NestedScrollView>
+
+    <LinearLayout
+        android:id="@+id/poke_container"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:elevation="-2dp"
+        android:orientation="horizontal"
+        android:transitionName="pokeContainer"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/detail_toolbar" />
+
+    <LinearLayout
+        android:id="@+id/bg_detail"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginStart="16sp"
+        android:layout_marginEnd="16sp"
+        android:background="?android:attr/colorBackground"
+        android:elevation="-1dp"
+        android:orientation="horizontal"
+        android:transitionName="bgDetail"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/detail_toolbar" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

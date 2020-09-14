@@ -2,8 +2,11 @@ package com.ervin.pokedex
 
 import android.app.Application
 import com.ervin.pokedex.di.firstLaunchServiceModule
-import com.ervin.pokedex.di.listPokemonModule
-import com.ervin.pokedex.di.sharedmodule.*
+import com.ervin.pokedex.di.sharedmodule.coreModule
+import com.ervin.pokedex.di.sharedmodule.detailApiModule
+import com.ervin.pokedex.di.sharedmodule.homeModules
+import com.ervin.pokedex.di.sharedmodule.localModule
+import com.ervin.pokedex.di.sharedmodule.remoteModule
 import com.ervin.pokedex.di.useCaseModules
 import com.ervin.pokedex.di.viewModelModules
 import kotlinx.coroutines.ExperimentalCoroutinesApi
@@ -25,7 +28,6 @@ class MyPokedexApp : Application() {
             listModules.add(remoteModule)
             listModules.add(coreModule)
             listModules.addAll(homeModules)
-            listModules.add(listPokemonModule)
             listModules.add(detailApiModule)
             listModules.add(useCaseModules)
             listModules.add(viewModelModules)

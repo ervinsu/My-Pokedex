@@ -2,22 +2,31 @@ package com.ervin.list_pokemon.ui
 
 import android.os.Bundle
 import android.util.Log
-import android.view.*
+import android.view.LayoutInflater
+import android.view.Menu
+import android.view.MenuInflater
+import android.view.View
+import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.GridLayoutManager
+import com.ervin.library_common.navigation.FeatureDetail
 import com.ervin.library_common.util.calculateNoOfColumn
 import com.ervin.list_pokemon.R
 import com.ervin.list_pokemon.ui.adapter.ListPokemonAdapter
 import com.ervin.pokedex.core.data.source.Resource
-import kotlinx.android.synthetic.main.fragment_home.view.*
+import kotlinx.android.synthetic.main.fragment_home.view.recyclerview_list_pokemon
 import org.koin.android.scope.lifecycleScope
 import org.koin.android.viewmodel.ext.android.viewModel
+import org.koin.core.parameter.parametersOf
 
 class ListPokemonFragment : Fragment() {
 
     private val listPokemonViewModel: ListPokemonViewModel by viewModel()
+    private val featureDetail: FeatureDetail by lifecycleScope.inject {
+        parametersOf(this)
+    }
     private val adapter: ListPokemonAdapter by lifecycleScope.inject()
 
     override fun onCreateView(
@@ -80,6 +89,7 @@ class ListPokemonFragment : Fragment() {
     }
 
     private fun View.initRecyclerview() {
+        adapter.setListener(featureDetail)
         this.recyclerview_list_pokemon.adapter = adapter
 
         val rowSpan = calculateNoOfColumn(
