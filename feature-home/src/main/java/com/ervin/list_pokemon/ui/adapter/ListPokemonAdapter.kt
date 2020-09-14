@@ -18,10 +18,10 @@ import com.ervin.library_common.extension.onClick
 import com.ervin.library_common.navigation.FeatureDetail
 import com.ervin.list_pokemon.R
 import com.ervin.pokedex.core.domain.model.Pokemon
-import kotlinx.android.synthetic.main.fragment_home.bg_detail
-import kotlinx.android.synthetic.main.home_view_item.view.iv_poke_picture
-import kotlinx.android.synthetic.main.home_view_item.view.poke_container
-import kotlinx.android.synthetic.main.home_view_item.view.poke_name
+import kotlinx.android.synthetic.main.fragment_list_pokemon.bg_detail
+import kotlinx.android.synthetic.main.list_pokemon_view_item.view.iv_poke_picture
+import kotlinx.android.synthetic.main.list_pokemon_view_item.view.poke_container
+import kotlinx.android.synthetic.main.list_pokemon_view_item.view.poke_name
 
 class ListPokemonAdapter :
     RecyclerView.Adapter<RecyclerView.ViewHolder>() {
@@ -84,7 +84,7 @@ class ListPokemonAdapter :
     override fun getItemCount(): Int = listPokemon.size
 
     class ListPokemonViewHolder(parent: ViewGroup) : BaseViewHolder(
-        LayoutInflater.from(parent.context).inflate(R.layout.home_view_item, parent, false)
+        LayoutInflater.from(parent.context).inflate(R.layout.list_pokemon_view_item, parent, false)
     ) {
         fun bind(pokemon: Pokemon) {
             itemView.poke_name.text = pokemon.pokemonName

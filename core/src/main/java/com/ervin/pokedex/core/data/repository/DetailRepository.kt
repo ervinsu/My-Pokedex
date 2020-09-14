@@ -6,8 +6,7 @@ import com.ervin.pokedex.core.domain.repository.DetailRepositoryContract
 import com.ervin.pokedex.core.util.mappingPokemonDomainModelToEntity
 
 class DetailRepository(private val localDataSource: LocalDataSource) : DetailRepositoryContract {
-    override suspend fun setFavoritePokemon(pokemon: Pokemon, isFavorite: Boolean) {
-//        pokemon.isFavorite = isFavorite
+    override suspend fun setFavoritePokemon(pokemon: Pokemon) {
         localDataSource.updateFavoritePokemon(pokemon.mappingPokemonDomainModelToEntity())
     }
 }

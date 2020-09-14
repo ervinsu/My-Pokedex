@@ -17,3 +17,11 @@ fun <T : RecyclerView.ViewHolder> T.onClick(action: (view: View, position: Int) 
     }
     return this
 }
+
+fun View.setGone() {
+    visibility = View.GONE
+}
+
+fun View.setVisible() {
+    visibility = View.VISIBLE
+}

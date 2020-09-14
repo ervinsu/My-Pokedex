@@ -1,6 +1,8 @@
 package com.ervin.pokedex.di
 
 import android.content.Intent
+import com.ervin.favorite_pokemon.ui.FavoritePokemonFragment
+import com.ervin.favorite_pokemon.ui.FavoritePokemonViewModel
 import com.ervin.feature_detail.ui.DetailActivity
 import com.ervin.library_common.navigation.FeatureDetail
 import com.ervin.list_pokemon.ui.ListPokemonFragment
@@ -35,7 +37,11 @@ val homeRepositoryModule = module {
 @ExperimentalCoroutinesApi
 val homeActivityModule = module {
     factory<HomeUseCase> { HomeInteractor(get(), androidContext()) }
+    factory {
+        ListPokemonAdapter()
+    }
     viewModel { ListPokemonViewModel(get()) }
+    viewModel { FavoritePokemonViewModel(get()) }
 }
 
 val listPokemonModule = module {
@@ -48,8 +54,18 @@ val listPokemonModule = module {
 
             }
         }
-        scoped {
-            ListPokemonAdapter()
+    }
+}
+
+val favoritePokemonModule = module {
+    scope(named<FavoritePokemonFragment>()) {
+        scoped<FeatureDetail> { (fragment: FavoritePokemonFragment) ->
+            object : FeatureDetail {
+                override fun createIntent(): Intent {
+                    return Intent(fragment.activity, DetailActivity::class.java)
+                }
+
+            }
         }
     }
 }
@@ -59,5 +75,6 @@ val homeModules = listOf(
     homeApiModule,
     homeRepositoryModule,
     homeActivityModule,
-    listPokemonModule
+    listPokemonModule,
+    favoritePokemonModule
 )

@@ -7,9 +7,9 @@ import com.ervin.pokedex.core.domain.usecase.detail.DetailUseCase
 import kotlinx.coroutines.launch
 
 class DetailViewModel(private val detailUseCase: DetailUseCase) : ViewModel() {
-    fun setFavoritePokemon(pokemon: Pokemon, isFavorite: Boolean) {
+    fun setFavoritePokemon(pokemon: Pokemon) {
         viewModelScope.launch {
-            detailUseCase.setFavoritePokemon(pokemon, isFavorite)
+            detailUseCase.setFavoritePokemon(pokemon)
         }
     }
 }

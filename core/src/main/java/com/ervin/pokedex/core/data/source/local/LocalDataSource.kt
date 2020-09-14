@@ -11,6 +11,8 @@ class LocalDataSource(private val dao: PokemonDao) {
 
     fun getAllPokemon(): Flow<List<PokemonLocalResponse>> = dao.getAllPokemon()
 
+    fun getAllFavoritePokemon(): Flow<List<PokemonLocalResponse>> = dao.getAllFavoritePokemon()
+
     fun getSizeDBPokemon() = dao.getSizePokemon()
 
     fun getSizeDBElement() = dao.getSizeElement()

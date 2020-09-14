@@ -55,12 +55,13 @@ class DetailActivity : AppCompatActivity() {
             detail_toolbar.title = pokemon.pokemonName
         }
 
+        /**
+         * define toolbar
+         */
+        setSupportActionBar(detail_toolbar)
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            /**
-             * define toolbar
-             */
-            setSupportActionBar(detail_toolbar)
-            supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
             /**
              * define transition animation
@@ -79,7 +80,7 @@ class DetailActivity : AppCompatActivity() {
         fab_bookmark.setOnClickListener {
             pokemon.isFavorite = !pokemon.isFavorite
             setFavoritePokemon(pokemon.isFavorite)
-            detailViewModel.setFavoritePokemon(pokemon, true)
+            detailViewModel.setFavoritePokemon(pokemon)
         }
     }
 

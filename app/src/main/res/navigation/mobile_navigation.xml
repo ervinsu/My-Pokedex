@@ -9,13 +9,13 @@
         android:id="@+id/nav_list_pokemon"
         android:name="com.ervin.list_pokemon.ui.ListPokemonFragment"
         android:label="@string/menu_list_pokemon"
-        tools:layout="@layout/fragment_home" />
+        tools:layout="@layout/fragment_list_pokemon" />
 
     <fragment
         android:id="@+id/nav_favorite_pokemon"
-        android:name="com.ervin.pokedex.ui.gallery.GalleryFragment"
+        android:name="com.ervin.favorite_pokemon.ui.FavoritePokemonFragment"
         android:label="@string/menu_favorite"
-        tools:layout="@layout/fragment_gallery" />
+        tools:layout="@layout/fragment_list_pokemon" />
 
     <fragment
         android:id="@+id/nav_about"

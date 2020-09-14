@@ -1,9 +1,7 @@
-package com.ervin.list_pokemon.ui
+package com.ervin.favorite_pokemon.ui
 
 import android.os.Bundle
 import android.view.LayoutInflater
-import android.view.Menu
-import android.view.MenuInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
@@ -23,9 +21,9 @@ import org.koin.android.scope.lifecycleScope
 import org.koin.android.viewmodel.ext.android.viewModel
 import org.koin.core.parameter.parametersOf
 
-class ListPokemonFragment : Fragment() {
+class FavoritePokemonFragment : Fragment() {
 
-    private val listPokemonViewModel: ListPokemonViewModel by viewModel()
+    private val favoritePokemonViewModel: FavoritePokemonViewModel by viewModel()
     private val featureDetail: FeatureDetail by lifecycleScope.inject {
         parametersOf(this)
     }
@@ -36,7 +34,6 @@ class ListPokemonFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        setHasOptionsMenu(true)
         return inflater.inflate(R.layout.fragment_list_pokemon, container, false)
     }
 
@@ -45,17 +42,21 @@ class ListPokemonFragment : Fragment() {
         if (activity == null) return
         initRecyclerview()
 
-        listPokemonViewModel.pokemons.observe(viewLifecycleOwner, Observer {
+        favoritePokemonViewModel.favoritePokemon.observe(viewLifecycleOwner, Observer {
             when (it) {
                 is Resource.Success -> {
                     pg_list_pokemon.setGone()
                     recyclerview_list_pokemon.setVisible()
 
                     if (it.data.isNullOrEmpty()) {
-                        Toast.makeText(activity, "Data Not Found", Toast.LENGTH_SHORT).show()
-                    } else {
-                        adapter.setListPokemon(it.data!!)
+                        Toast.makeText(
+                            activity,
+                            "No favorite pokemon, let's have some!",
+                            Toast.LENGTH_SHORT
+                        ).show()
                     }
+
+                    adapter.setListPokemon(it.data!!)
                 }
                 is Resource.Error -> {
                     recyclerview_list_pokemon.setGone()
@@ -68,24 +69,6 @@ class ListPokemonFragment : Fragment() {
                 }
             }
         })
-
-        listPokemonViewModel.elements.observe(viewLifecycleOwner, Observer {
-            when (it) {
-                is Resource.Success -> {
-                    listPokemonViewModel.maybeFetchRemotePokemon()
-                }
-                is Resource.Loading -> {
-                }
-                is Resource.Error -> {
-                    Toast.makeText(activity, "Failed to get Data Element", Toast.LENGTH_LONG).show()
-                }
-            }
-        })
-    }
-
-    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-        inflater.inflate(R.menu.main, menu)
-        super.onCreateOptionsMenu(menu, inflater)
     }
 
     private fun initRecyclerview() {

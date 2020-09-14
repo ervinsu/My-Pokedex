@@ -40,6 +40,24 @@ class HomeRepository(
             }
         }
 
+    override fun getAllFavoritePokemon(): Flow<Resource<List<Pokemon>>> =
+        flow {
+            /**
+             * get Favorite Pokemon
+             */
+            try {
+                emitAll(
+                    localDataSource
+                        .getAllFavoritePokemon()
+                        .map {
+                            Resource.Success(mappingPokemonEntityToDomainModel(it))
+                        }
+                )
+            } catch (e: Exception) {
+                emit(Resource.Error("Error on HomeRepository $e"))
+            }
+        }
+
     override fun getLocalPokemonSize(): Flow<Int> = localDataSource.getSizeDBPokemon()
 
     override fun maybeGetRemoteElement() =

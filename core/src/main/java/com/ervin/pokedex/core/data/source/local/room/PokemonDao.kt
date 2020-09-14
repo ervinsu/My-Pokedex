@@ -29,6 +29,9 @@ interface PokemonDao {
     @Query("SELECT * FROM pokemon")
     fun getAllPokemon(): Flow<List<PokemonLocalResponse>>
 
+    @Query("SELECT * FROM pokemon WHERE pokemon_favorite = 1")
+    fun getAllFavoritePokemon(): Flow<List<PokemonLocalResponse>>
+
     @Query("SELECT COUNT(pokemon_id) FROM POKEMON")
     fun getSizePokemon(): Flow<Int>
 
