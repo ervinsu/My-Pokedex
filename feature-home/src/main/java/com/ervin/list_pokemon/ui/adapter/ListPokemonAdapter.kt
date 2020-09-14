@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.ervin.library_common.base.BaseViewHolder
 import com.ervin.library_common.extension.loadImage
+import com.ervin.library_common.extension.onClick
 import com.ervin.list_pokemon.R
 import com.ervin.pokedex.core.domain.model.Pokemon
 import kotlinx.android.synthetic.main.home_view_item.view.*
@@ -21,7 +22,9 @@ class ListPokemonAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
-        return ListPokemonViewHolder(parent)
+        return ListPokemonViewHolder(parent).onClick { _, position ->
+
+        }
     }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
