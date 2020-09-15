@@ -12,17 +12,29 @@ android {
     defaultConfig {
         minSdkVersion androidVersion.minSdkVersion
         targetSdkVersion androidVersion.targetSdkVersion
+        consumerProguardFiles "consumer-rules.pro"
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
     }
 }
 
 dependencies {
+    api libs.androidx.appcompat
+    api libs.androidx.constraintLayout
+    api libs.android.material
+
+
     //retrofit
     implementation libs.retrofit2.retrofit
     implementation libs.retrofit2.gson
-    implementation libs.retrofit2.retrofitRxJava2
 
     //koin
-    implementation libs.koin.android
+    api libs.koin.viewmodel
 
     //room
     implementation libs.androidx.room
@@ -33,14 +45,11 @@ dependencies {
     implementation libs.androidx.coroutineCore
     implementation libs.androidx.coroutineAnd
 
-    //rx java
-    implementation libs.androidx.rxjava2
-    implementation libs.androidx.rxandroid
-
-    //chuck see API call
-    implementation libs.chuck
-
-    //livedata
+    //livedata and lifecycle
     api libs.androidx.livedata
+    api libs.androidx.lifecycle
 
+    // Dependencies for Paging
+    ext.paging_version = '2.1.2'
+    implementation "androidx.paging:paging-runtime-ktx:$paging_version"
 }

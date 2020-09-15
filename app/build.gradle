@@ -32,29 +32,38 @@ android {
     kotlinOptions {
         jvmTarget = '1.8'
     }
+    dynamicFeatures = [':featurefavorite']
 }
 
 dependencies {
-    implementation project(":core")
+    api project(":core")
+    implementation project(":featurehome")
+    api project(":featuredetail")
+    api project(":librarycommon")
 
     implementation fileTree(dir: "libs", include: ["*.jar"])
     implementation libs.kotlinStdlibJdk8
-    implementation 'androidx.core:core-ktx:1.1.0'
-    implementation 'androidx.appcompat:appcompat:1.1.0'
-    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
-    implementation 'com.google.android.material:material:1.0.0'
-    implementation 'androidx.constraintlayout:constraintlayout:2.0.1'
-    implementation 'androidx.navigation:navigation-fragment:2.1.0'
-    implementation 'androidx.navigation:navigation-ui:2.1.0'
-    implementation 'androidx.lifecycle:lifecycle-extensions:2.2.0'
-    implementation 'androidx.navigation:navigation-fragment-ktx:2.1.0'
-    implementation 'androidx.navigation:navigation-ui-ktx:2.1.0'
 
-    implementation libs.koin.android
-    implementation libs.koin.viewmodel
-    implementation libs.koin.scope
+    //fragment
+    api 'androidx.navigation:navigation-fragment:2.3.0'
+    api 'androidx.navigation:navigation-ui:2.3.0'
+    api 'androidx.navigation:navigation-fragment-ktx:2.3.0'
+    api 'androidx.navigation:navigation-ui-ktx:2.3.0'
+    api 'androidx.navigation:navigation-dynamic-features-fragment:2.3.0'
 
-    testImplementation 'junit:junit:4.12'
+    //room
+    implementation libs.androidx.room
+    implementation libs.androidx.roomFlow
+    kapt           libs.androidx.roomCompiler
+
+    //retrofit
+    implementation libs.retrofit2.retrofit
+    implementation libs.retrofit2.gson
+
+    //chuck see API call
+    implementation libs.chuck
+
+    testImplementation 'junit:junit:4.13'
     androidTestImplementation 'androidx.test.ext:junit:1.1.2'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
 

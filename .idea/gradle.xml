@@ -13,6 +13,10 @@
             <option value="$PROJECT_DIR$" />
             <option value="$PROJECT_DIR$/app" />
             <option value="$PROJECT_DIR$/core" />
+            <option value="$PROJECT_DIR$/featuredetail" />
+            <option value="$PROJECT_DIR$/featurefavorite" />
+            <option value="$PROJECT_DIR$/featurehome" />
+            <option value="$PROJECT_DIR$/librarycommon" />
           </set>
         </option>
         <option name="resolveModulePerSourceSet" value="false" />

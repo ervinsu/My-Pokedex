@@ -5,5 +5,9 @@ import com.ervin.pokedex.core.domain.model.Pokemon
 import kotlinx.coroutines.flow.Flow
 
 interface HomeUseCase {
-    fun getAllPokemon(): Flow<Resource<List<Pokemon>>>
+    fun getAllLocalPokemon(): Flow<Resource<List<Pokemon>>>
+    fun getAllFavoritePokemon(): Flow<Resource<List<Pokemon>>>
+    fun maybeFetchRemotePokemon()
+    fun maybeFetchRemoteElement(): Flow<Resource<Int>>
+    fun getLocalPokemonSize(): Flow<Int>
 }

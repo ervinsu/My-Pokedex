@@ -1,9 +1,12 @@
 package com.ervin.pokedex
 
 import android.app.Application
-import com.ervin.pokedex.core.di.*
-import com.ervin.pokedex.di.useCaseModules
-import com.ervin.pokedex.di.viewModelModules
+import com.ervin.pokedex.di.detailModule
+import com.ervin.pokedex.di.homeModules
+import com.ervin.pokedex.di.sharedmodule.coreModule
+import com.ervin.pokedex.di.sharedmodule.localModule
+import com.ervin.pokedex.di.sharedmodule.remoteModule
+import kotlinx.coroutines.ExperimentalCoroutinesApi
 import org.koin.android.ext.koin.androidContext
 import org.koin.android.ext.koin.androidLogger
 import org.koin.core.context.startKoin
@@ -11,6 +14,7 @@ import org.koin.core.logger.Level
 import org.koin.core.module.Module
 
 class MyPokedexApp : Application() {
+    @ExperimentalCoroutinesApi
     override fun onCreate() {
         super.onCreate()
         startKoin {
@@ -19,11 +23,9 @@ class MyPokedexApp : Application() {
             val listModules = mutableListOf<Module>()
             listModules.add(localModule)
             listModules.add(remoteModule)
-            listModules.add(coreModule)
+            listModules.addAll(coreModule)
             listModules.addAll(homeModules)
-            listModules.add(detailApiModule)
-            listModules.add(useCaseModules)
-            listModules.add(viewModelModules)
+            listModules.addAll(detailModule)
             modules(
                 listModules
             )

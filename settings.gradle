@@ -1,3 +1,7 @@
+include ':featurefavorite'
+include ':featuredetail'
+include ':librarycommon'
+include ':featurehome'
 include ':core'
 include ':app'
 rootProject.name = "My-Pokedex"
