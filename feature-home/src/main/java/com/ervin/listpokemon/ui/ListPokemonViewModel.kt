@@ -1,4 +1,4 @@
-package com.ervin.list_pokemon.ui
+package com.ervin.listpokemon.ui
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel

@@ -1,11 +1,7 @@
-package com.ervin.list_pokemon.ui
+package com.ervin.listpokemon.ui
 
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.Menu
-import android.view.MenuInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
@@ -14,11 +10,10 @@ import com.ervin.library_common.extension.setGone
 import com.ervin.library_common.extension.setVisible
 import com.ervin.library_common.navigation.FeatureDetail
 import com.ervin.library_common.util.calculateNoOfColumn
-import com.ervin.list_pokemon.R
-import com.ervin.list_pokemon.ui.adapter.ListPokemonAdapter
+import com.ervin.listpokemon.R
+import com.ervin.listpokemon.ui.adapter.ListPokemonAdapter
 import com.ervin.pokedex.core.data.source.Resource
-import kotlinx.android.synthetic.main.fragment_list_pokemon.pg_list_pokemon
-import kotlinx.android.synthetic.main.fragment_list_pokemon.recyclerview_list_pokemon
+import kotlinx.android.synthetic.main.fragment_list_pokemon.*
 import org.koin.android.scope.lifecycleScope
 import org.koin.android.viewmodel.ext.android.viewModel
 import org.koin.core.parameter.parametersOf

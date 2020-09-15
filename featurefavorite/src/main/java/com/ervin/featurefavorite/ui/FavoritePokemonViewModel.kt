@@ -1,4 +1,4 @@
-package com.ervin.favorite_pokemon.ui
+package com.ervin.featurefavorite.ui
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.asLiveData

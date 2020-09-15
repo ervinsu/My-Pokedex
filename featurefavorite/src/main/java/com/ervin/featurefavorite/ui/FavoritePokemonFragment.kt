@@ -1,5 +1,6 @@
-package com.ervin.favorite_pokemon.ui
+package com.ervin.featurefavorite.ui
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -8,33 +9,34 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.GridLayoutManager
+import com.ervin.feature_detail.ui.DetailActivity
+import com.ervin.featurefavorite.R
+import com.ervin.featurefavorite.di.favoritePokemonModule
+import com.ervin.featurefavorite.ui.adapter.FavoritePokemonAdapter
 import com.ervin.library_common.extension.setGone
 import com.ervin.library_common.extension.setVisible
 import com.ervin.library_common.navigation.FeatureDetail
 import com.ervin.library_common.util.calculateNoOfColumn
-import com.ervin.list_pokemon.R
-import com.ervin.list_pokemon.ui.adapter.ListPokemonAdapter
 import com.ervin.pokedex.core.data.source.Resource
-import kotlinx.android.synthetic.main.fragment_list_pokemon.pg_list_pokemon
-import kotlinx.android.synthetic.main.fragment_list_pokemon.recyclerview_list_pokemon
-import org.koin.android.scope.lifecycleScope
+import kotlinx.android.synthetic.main.fragment_favorite_pokemon.*
 import org.koin.android.viewmodel.ext.android.viewModel
-import org.koin.core.parameter.parametersOf
+import org.koin.core.context.loadKoinModules
+import org.koin.java.KoinJavaComponent.get
 
 class FavoritePokemonFragment : Fragment() {
 
     private val favoritePokemonViewModel: FavoritePokemonViewModel by viewModel()
-    private val featureDetail: FeatureDetail by lifecycleScope.inject {
-        parametersOf(this)
+    private val adapter: FavoritePokemonAdapter by lazy {
+        get(FavoritePokemonAdapter::class.java)
     }
-    private val adapter: ListPokemonAdapter by lifecycleScope.inject()
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.fragment_list_pokemon, container, false)
+        loadKoinModules(favoritePokemonModule)
+        return inflater.inflate(R.layout.fragment_favorite_pokemon, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -72,7 +74,11 @@ class FavoritePokemonFragment : Fragment() {
     }
 
     private fun initRecyclerview() {
-        adapter.setListener(featureDetail)
+        adapter.setListener(object : FeatureDetail {
+            override fun createIntent(): Intent {
+                return Intent(activity, DetailActivity::class.java)
+            }
+        })
         recyclerview_list_pokemon.adapter = adapter
 
         val rowSpan = calculateNoOfColumn(

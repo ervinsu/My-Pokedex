@@ -8,4 +8,5 @@
     <string name="menu_favorite">Favorite</string>
     <string name="menu_about">About</string>
     <string name="title_feature_homepage">Homepage</string>
+    <string name="title_featurefavorite">Module Favorite Pokemon</string>
 </resources>

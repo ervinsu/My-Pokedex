@@ -1,3 +1,4 @@
+include ':featurefavorite'
 include ':feature-detail'
 include ':library-common'
 include ':feature-home'

@@ -32,22 +32,24 @@ android {
     kotlinOptions {
         jvmTarget = '1.8'
     }
+    dynamicFeatures = [':featurefavorite']
 }
 
 dependencies {
-    implementation project(":core")
+    api project(":core")
     implementation project(":feature-home")
-    implementation project(":feature-detail")
-    implementation project(":library-common")
+    api project(":feature-detail")
+    api project(":library-common")
 
     implementation fileTree(dir: "libs", include: ["*.jar"])
     implementation libs.kotlinStdlibJdk8
 
     //fragment
-    implementation 'androidx.navigation:navigation-fragment:2.3.0'
-    implementation 'androidx.navigation:navigation-ui:2.3.0'
-    implementation 'androidx.navigation:navigation-fragment-ktx:2.3.0'
-    implementation 'androidx.navigation:navigation-ui-ktx:2.3.0'
+    api 'androidx.navigation:navigation-fragment:2.3.0'
+    api 'androidx.navigation:navigation-ui:2.3.0'
+    api 'androidx.navigation:navigation-fragment-ktx:2.3.0'
+    api 'androidx.navigation:navigation-ui-ktx:2.3.0'
+    api 'androidx.navigation:navigation-dynamic-features-fragment:2.3.0'
 
     //room
     implementation libs.androidx.room

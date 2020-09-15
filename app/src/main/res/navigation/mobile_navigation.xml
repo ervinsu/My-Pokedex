@@ -7,13 +7,14 @@
 
     <fragment
         android:id="@+id/nav_list_pokemon"
-        android:name="com.ervin.list_pokemon.ui.ListPokemonFragment"
+        android:name="com.ervin.listpokemon.ui.ListPokemonFragment"
         android:label="@string/menu_list_pokemon"
         tools:layout="@layout/fragment_list_pokemon" />
 
     <fragment
+        android:name="com.ervin.featurefavorite.ui.FavoritePokemonFragment"
         android:id="@+id/nav_favorite_pokemon"
-        android:name="com.ervin.favorite_pokemon.ui.FavoritePokemonFragment"
+        app:moduleName="featurefavorite"
         android:label="@string/menu_favorite"
         tools:layout="@layout/fragment_list_pokemon" />
 
