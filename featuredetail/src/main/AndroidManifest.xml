@@ -3,7 +3,7 @@
     package="com.ervin.feature_detail">
 
     <application>
-        <activity android:name=".ui.DetailActivity"></activity>
+        <activity android:name=".ui.DetailActivity" />
     </application>
 
 </manifest>

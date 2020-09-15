@@ -37,9 +37,9 @@ android {
 
 dependencies {
     api project(":core")
-    implementation project(":feature-home")
-    api project(":feature-detail")
-    api project(":library-common")
+    implementation project(":featurehome")
+    api project(":featuredetail")
+    api project(":librarycommon")
 
     implementation fileTree(dir: "libs", include: ["*.jar"])
     implementation libs.kotlinStdlibJdk8

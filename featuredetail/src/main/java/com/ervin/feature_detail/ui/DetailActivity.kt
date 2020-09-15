@@ -17,27 +17,7 @@ import com.ervin.library_common.extension.loadImage
 import com.ervin.library_common.navigation.FeatureDetail
 import com.ervin.pokedex.core.domain.model.Pokemon
 import com.ervin.pokedex.core.domain.model.Type
-import kotlinx.android.synthetic.main.activity_detail.bg_detail
-import kotlinx.android.synthetic.main.activity_detail.detail_toolbar
-import kotlinx.android.synthetic.main.activity_detail.fab_bookmark
-import kotlinx.android.synthetic.main.activity_detail.iv_poke_picture
-import kotlinx.android.synthetic.main.activity_detail.poke_container
-import kotlinx.android.synthetic.main.activity_detail.progressbar_attack
-import kotlinx.android.synthetic.main.activity_detail.progressbar_defense
-import kotlinx.android.synthetic.main.activity_detail.progressbar_hp
-import kotlinx.android.synthetic.main.activity_detail.progressbar_sp_attack
-import kotlinx.android.synthetic.main.activity_detail.progressbar_sp_defense
-import kotlinx.android.synthetic.main.activity_detail.progressbar_speed
-import kotlinx.android.synthetic.main.activity_detail.tv_height
-import kotlinx.android.synthetic.main.activity_detail.tv_poke_attack
-import kotlinx.android.synthetic.main.activity_detail.tv_poke_defense
-import kotlinx.android.synthetic.main.activity_detail.tv_poke_hp
-import kotlinx.android.synthetic.main.activity_detail.tv_poke_sp_attack
-import kotlinx.android.synthetic.main.activity_detail.tv_poke_sp_defense
-import kotlinx.android.synthetic.main.activity_detail.tv_poke_speed
-import kotlinx.android.synthetic.main.activity_detail.tv_type_name1
-import kotlinx.android.synthetic.main.activity_detail.tv_type_name2
-import kotlinx.android.synthetic.main.activity_detail.tv_weight
+import kotlinx.android.synthetic.main.activity_detail.*
 import org.koin.android.viewmodel.ext.android.viewModel
 
 class DetailActivity : AppCompatActivity() {
