@@ -6,6 +6,7 @@ import kotlinx.coroutines.flow.Flow
 
 interface HomeRepositoryContract {
     fun getAllLocalPokemon(): Flow<Resource<List<Pokemon>>>
+    suspend fun getSearchedPokemon(input: String): List<Pokemon>
     fun getAllFavoritePokemon(): Flow<Resource<List<Pokemon>>>
     fun getLocalPokemonSize(): Flow<Int>
     fun maybeGetRemoteElement(): Flow<Resource<Int>>

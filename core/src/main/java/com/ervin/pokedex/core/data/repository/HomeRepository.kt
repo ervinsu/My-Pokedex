@@ -8,13 +8,7 @@ import com.ervin.pokedex.core.domain.model.Pokemon
 import com.ervin.pokedex.core.domain.repository.HomeRepositoryContract
 import com.ervin.pokedex.core.util.mappingElementApiResponseToLocalResponse
 import com.ervin.pokedex.core.util.mappingPokemonEntityToDomainModel
-import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.catch
-import kotlinx.coroutines.flow.collect
-import kotlinx.coroutines.flow.emitAll
-import kotlinx.coroutines.flow.first
-import kotlinx.coroutines.flow.flow
-import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.flow.*
 
 class HomeRepository(
     private val remoteDataSource: RemoteDataSource,
@@ -39,6 +33,10 @@ class HomeRepository(
                 emit(Resource.Error("Error on HomeRepository $e"))
             }
         }
+
+    override suspend fun getSearchedPokemon(input: String): List<Pokemon> {
+        return mappingPokemonEntityToDomainModel(localDataSource.getSearchedPokemon(input))
+    }
 
     override fun getAllFavoritePokemon(): Flow<Resource<List<Pokemon>>> =
         flow {

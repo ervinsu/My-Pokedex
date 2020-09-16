@@ -25,6 +25,10 @@ class HomeInteractor(
     override fun getAllFavoritePokemon(): Flow<Resource<List<Pokemon>>> =
         homeRepository.getAllFavoritePokemon()
 
+    override suspend fun getSearchedPokemon(input: String): List<Pokemon> =
+        homeRepository.getSearchedPokemon(input)
+
+
     override fun maybeFetchRemotePokemon() {
         CoroutineScope(Dispatchers.Default).launch {
             getLocalPokemonSize().collect {

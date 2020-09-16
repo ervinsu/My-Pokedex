@@ -1,10 +1,6 @@
 package com.ervin.pokedex.core.data.source.local.room
 
-import androidx.room.Dao
-import androidx.room.Insert
-import androidx.room.OnConflictStrategy
-import androidx.room.Query
-import androidx.room.Update
+import androidx.room.*
 import com.ervin.pokedex.core.data.source.local.entity.ElementEntity
 import com.ervin.pokedex.core.data.source.local.entity.PokemonEntity
 import com.ervin.pokedex.core.data.source.local.entity.foreignkey.PokemonElementEntity
@@ -31,6 +27,9 @@ interface PokemonDao {
 
     @Query("SELECT * FROM pokemon WHERE pokemon_favorite = 1")
     fun getAllFavoritePokemon(): Flow<List<PokemonLocalResponse>>
+
+    @Query("SELECT * FROM pokemon WHERE pokemon_name like '%' ||:input || '%'")
+    suspend fun getSearchedPokemon(input: String): List<PokemonLocalResponse>
 
     @Query("SELECT COUNT(pokemon_id) FROM POKEMON")
     fun getSizePokemon(): Flow<Int>
