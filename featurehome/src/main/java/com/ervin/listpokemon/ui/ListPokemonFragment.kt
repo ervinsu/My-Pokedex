@@ -14,9 +14,11 @@ import com.ervin.library_common.extension.setVisible
 import com.ervin.library_common.navigation.FeatureDetail
 import com.ervin.library_common.util.calculateNoOfColumn
 import com.ervin.library_common.util.hideKeyboard
+import com.ervin.library_common.util.isServiceRunning
 import com.ervin.listpokemon.R
 import com.ervin.listpokemon.ui.adapter.ListPokemonAdapter
 import com.ervin.pokedex.core.data.source.Resource
+import com.ervin.pokedex.core.domain.backgroundservice.HomeFirstLaunchService
 import kotlinx.android.synthetic.main.fragment_list_pokemon.*
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.FlowPreview
@@ -47,49 +49,67 @@ class ListPokemonFragment : ScopeFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        if (activity == null) return
+        if (activity == null || context == null) return
         initRecyclerview()
 
-        listPokemonViewModel.pokemons.observe(viewLifecycleOwner, Observer {
-            when (it) {
-                is Resource.Success -> {
-                    pg_list_pokemon.setGone()
-                    recyclerview_list_pokemon.setVisible()
-
-                    if (it.data.isNullOrEmpty()) {
-                        Toast.makeText(activity, "Data Not Found", Toast.LENGTH_SHORT).show()
-                    } else {
-                        adapter.setListPokemon(it.data!!)
+        if (!context!!.isServiceRunning(HomeFirstLaunchService::class.java)) {
+            listPokemonViewModel.pokemons.observe(viewLifecycleOwner, Observer {
+                when (it) {
+                    is Resource.Success -> {
+                        /**
+                         * data not found and not trying to run service that fetch pokemons
+                         */
+                        if (it.data.isNullOrEmpty() && context!!.isServiceRunning(
+                                HomeFirstLaunchService::class.java
+                            )
+                        ) {
+                            Toast.makeText(activity, "Data Not Found", Toast.LENGTH_SHORT)
+                                .show()
+                        } else {
+                            if (it.data.isNullOrEmpty()) {
+                                Toast.makeText(
+                                    activity,
+                                    "Data Not Found, now fetching the pokemon",
+                                    Toast.LENGTH_SHORT
+                                ).show()
+                            } else {
+                                pg_list_pokemon.setGone()
+                                recyclerview_list_pokemon.setVisible()
+                                adapter.setListPokemon(it.data!!)
+                            }
+                        }
+                    }
+                    is Resource.Error -> {
+                        recyclerview_list_pokemon.setGone()
+                        pg_list_pokemon.setGone()
+                        Toast.makeText(activity, "Failed to get Data Pokemon", Toast.LENGTH_LONG)
+                            .show()
+                    }
+                    is Resource.Loading -> {
+                        recyclerview_list_pokemon.setGone()
+                        pg_list_pokemon.setVisible()
                     }
                 }
-                is Resource.Error -> {
-                    recyclerview_list_pokemon.setGone()
-                    pg_list_pokemon.setGone()
-                    Toast.makeText(activity, "Failed to get Data Pokemon", Toast.LENGTH_LONG).show()
-                }
-                is Resource.Loading -> {
-                    recyclerview_list_pokemon.setGone()
-                    pg_list_pokemon.setVisible()
-                }
-            }
-        })
+            })
 
-        listPokemonViewModel.elements.observe(viewLifecycleOwner, Observer {
-            when (it) {
-                is Resource.Success -> {
-                    listPokemonViewModel.maybeFetchRemotePokemon()
+            listPokemonViewModel.elements.observe(viewLifecycleOwner, Observer {
+                when (it) {
+                    is Resource.Success -> {
+                        listPokemonViewModel.maybeFetchRemotePokemon()
+                    }
+                    is Resource.Loading -> {
+                    }
+                    is Resource.Error -> {
+                        Toast.makeText(activity, "Failed to get Data Element", Toast.LENGTH_LONG)
+                            .show()
+                    }
                 }
-                is Resource.Loading -> {
-                }
-                is Resource.Error -> {
-                    Toast.makeText(activity, "Failed to get Data Element", Toast.LENGTH_LONG).show()
-                }
-            }
-        })
+            })
 
-        listPokemonViewModel.searchResult.observe(viewLifecycleOwner, Observer {
-            adapter.setListPokemon(it)
-        })
+            listPokemonViewModel.searchResult.observe(viewLifecycleOwner, Observer {
+                adapter.setListPokemon(it)
+            })
+        }
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {

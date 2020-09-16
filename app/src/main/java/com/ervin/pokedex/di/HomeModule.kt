@@ -1,6 +1,7 @@
 package com.ervin.pokedex.di
 
 import android.content.Intent
+import com.ervin.about.ui.AboutMeViewModel
 import com.ervin.feature_detail.ui.DetailActivity
 import com.ervin.library_common.navigation.FeatureDetail
 import com.ervin.listpokemon.ui.ListPokemonFragment
@@ -12,6 +13,7 @@ import com.ervin.pokedex.core.domain.repository.HomeRepositoryContract
 import com.ervin.pokedex.core.domain.usecase.home.HomeInteractor
 import com.ervin.pokedex.core.domain.usecase.home.HomeUseCase
 import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.FlowPreview
 import org.koin.android.ext.koin.androidContext
 import org.koin.android.viewmodel.dsl.viewModel
 import org.koin.core.qualifier.named
@@ -32,12 +34,16 @@ val homeRepositoryModule = module {
     }
 }
 
+@FlowPreview
 @ExperimentalCoroutinesApi
 val homeActivityModule = module {
     factory<HomeUseCase> { HomeInteractor(get(), androidContext()) }
     viewModel { ListPokemonViewModel(get()) }
+    viewModel { AboutMeViewModel() }
 }
 
+@ExperimentalCoroutinesApi
+@FlowPreview
 val listPokemonModule = module {
     scope(named<ListPokemonFragment>()) {
         scoped<FeatureDetail> { (fragment: ListPokemonFragment) ->
@@ -54,6 +60,7 @@ val listPokemonModule = module {
     }
 }
 
+@FlowPreview
 @ExperimentalCoroutinesApi
 val homeModules = listOf(
     homeApiModule,
