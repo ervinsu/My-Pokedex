@@ -22,3 +22,8 @@
 - Search pokemon
 - Add pokemon to favorite and see favorite's pokemon
 - Dark mode (by system phone)
+
+# Credits
+Big thanks to [pokedex.org](https://pokedex.org/) Who inspire me about Pokedex app! 
+Thanks to [PokeAPI](https://pokeapi.co/) for the Pokémon data, and of course to Nintendo, Game Freak, and The Pokémon Company!
+Pokémon and Pokémon character names are trademarks of Nintendo.
