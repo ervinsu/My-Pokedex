@@ -20,7 +20,7 @@
 
     <fragment
         android:id="@+id/nav_about"
-        android:name="com.ervin.pokedex.ui.slideshow.SlideshowFragment"
+        android:name="com.ervin.about.ui.AboutMeFragment"
         android:label="@string/menu_about"
-        tools:layout="@layout/fragment_slideshow" />
+        tools:layout="@layout/fragment_about" />
 </navigation>

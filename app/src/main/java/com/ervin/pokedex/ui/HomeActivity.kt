@@ -1,4 +1,4 @@
-package com.ervin.pokedex
+package com.ervin.pokedex.ui
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
@@ -10,6 +10,7 @@ import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
+import com.ervin.pokedex.R
 import com.google.android.material.navigation.NavigationView
 
 class HomeActivity : AppCompatActivity() {
@@ -32,7 +33,9 @@ class HomeActivity : AppCompatActivity() {
         // menu should be considered as top level destinations.
         appBarConfiguration = AppBarConfiguration(
             setOf(
-                R.id.nav_list_pokemon, R.id.nav_favorite_pokemon, R.id.nav_about
+                R.id.nav_list_pokemon,
+                R.id.nav_favorite_pokemon,
+                R.id.nav_about
             ), drawerLayout
         )
 
