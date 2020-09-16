@@ -14,6 +14,7 @@ ext {
                     'livedata'        : 'androidx.lifecycle:lifecycle-livedata-ktx:2.2.0',
                     'recyclerview'    : 'androidx.recyclerview:recyclerview:1.1.0',
                     'lifecycle'       : 'androidx.lifecycle:lifecycle-extensions:2.2.0',
+                    'lifecycleKtx'    : 'androidx.lifecycle:lifecycle-runtime-ktx:2.2.0',
                     'constraintLayout': 'androidx.constraintlayout:constraintlayout:2.0.1',
                     'room'            : 'androidx.room:room-runtime:2.2.5',
                     'roomFlow'        : 'androidx.room:room-ktx:2.2.5',
@@ -32,7 +33,7 @@ ext {
 
             ],
             'koin'            : [
-                    'viewmodel': 'org.koin:koin-android-viewmodel:2.1.5'
+                    'viewmodel': 'org.koin:koin-android-viewmodel:2.2.0-alpha-1'
             ],
             'chuck'         : 'com.readystatesoftware.chuck:library:1.1.0'
     ]

@@ -1,30 +1,40 @@
 package com.ervin.listpokemon.ui
 
+import android.app.SearchManager
+import android.content.Context
 import android.os.Bundle
 import android.view.*
 import android.widget.Toast
-import androidx.fragment.app.Fragment
+import androidx.appcompat.widget.SearchView
 import androidx.lifecycle.Observer
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.GridLayoutManager
 import com.ervin.library_common.extension.setGone
 import com.ervin.library_common.extension.setVisible
 import com.ervin.library_common.navigation.FeatureDetail
 import com.ervin.library_common.util.calculateNoOfColumn
+import com.ervin.library_common.util.hideKeyboard
 import com.ervin.listpokemon.R
 import com.ervin.listpokemon.ui.adapter.ListPokemonAdapter
 import com.ervin.pokedex.core.data.source.Resource
 import kotlinx.android.synthetic.main.fragment_list_pokemon.*
-import org.koin.android.scope.lifecycleScope
+import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.FlowPreview
+import kotlinx.coroutines.launch
+import org.koin.android.scope.ScopeFragment
 import org.koin.android.viewmodel.ext.android.viewModel
 import org.koin.core.parameter.parametersOf
 
-class ListPokemonFragment : Fragment() {
+
+@ExperimentalCoroutinesApi
+@FlowPreview
+class ListPokemonFragment : ScopeFragment() {
 
     private val listPokemonViewModel: ListPokemonViewModel by viewModel()
-    private val featureDetail: FeatureDetail by lifecycleScope.inject {
+    private val featureDetail: FeatureDetail by inject {
         parametersOf(this)
     }
-    private val adapter: ListPokemonAdapter by lifecycleScope.inject()
+    private val adapter: ListPokemonAdapter by inject()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -76,10 +86,34 @@ class ListPokemonFragment : Fragment() {
                 }
             }
         })
+
+        listPokemonViewModel.searchResult.observe(viewLifecycleOwner, Observer {
+            adapter.setListPokemon(it)
+        })
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         inflater.inflate(R.menu.main, menu)
+        val manager =
+            requireActivity().getSystemService(Context.SEARCH_SERVICE) as SearchManager
+
+        val search: SearchView = menu.findItem(R.id.app_bar_search)?.actionView as SearchView
+
+        search.setSearchableInfo(manager.getSearchableInfo(requireActivity().componentName))
+
+        search.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(query: String?): Boolean {
+                activity!!.hideKeyboard()
+                return true
+            }
+
+            override fun onQueryTextChange(newText: String?): Boolean {
+                lifecycleScope.launch {
+                    listPokemonViewModel.queryChannel.send(newText.toString())
+                }
+                return true
+            }
+        })
         super.onCreateOptionsMenu(menu, inflater)
     }
 
