@@ -3,6 +3,9 @@ package com.ervin.pokedex.core.domain.model
 import android.os.Parcelable
 import kotlinx.android.parcel.Parcelize
 
+/**
+ * We need parcelable here, because we pass this class whenever we show the [com.ervin.feature_detail.ui.DetailActivity]
+ */
 @Parcelize
 data class Pokemon(
     val pokemonId: Int,

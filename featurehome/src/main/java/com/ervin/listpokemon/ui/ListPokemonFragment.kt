@@ -6,7 +6,6 @@ import android.os.Bundle
 import android.view.*
 import android.widget.Toast
 import androidx.appcompat.widget.SearchView
-import androidx.lifecycle.Observer
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.GridLayoutManager
 import com.ervin.library_common.extension.setGone
@@ -52,16 +51,16 @@ class ListPokemonFragment : ScopeFragment() {
         if (activity == null || context == null) return
         initRecyclerview()
 
-        if (!context!!.isServiceRunning(HomeFirstLaunchService::class.java)) {
-            listPokemonViewModel.pokemons.observe(viewLifecycleOwner, Observer {
+        if (context?.isServiceRunning(HomeFirstLaunchService::class.java) != true) {
+            listPokemonViewModel.pokemons.observe(viewLifecycleOwner, {
                 when (it) {
                     is Resource.Success -> {
                         /**
                          * data not found and not trying to run service that fetch pokemons
                          */
-                        if (it.data.isNullOrEmpty() && context!!.isServiceRunning(
+                        if (it.data.isNullOrEmpty() && (context?.isServiceRunning(
                                 HomeFirstLaunchService::class.java
-                            )
+                            ) == true)
                         ) {
                             Toast.makeText(activity, "Data Not Found", Toast.LENGTH_SHORT)
                                 .show()
@@ -75,7 +74,7 @@ class ListPokemonFragment : ScopeFragment() {
                             } else {
                                 pg_list_pokemon.setGone()
                                 recyclerview_list_pokemon.setVisible()
-                                adapter.setListPokemon(it.data!!)
+                                adapter.setListPokemon(it.data ?: listOf())
                             }
                         }
                     }
@@ -92,7 +91,7 @@ class ListPokemonFragment : ScopeFragment() {
                 }
             })
 
-            listPokemonViewModel.elements.observe(viewLifecycleOwner, Observer {
+            listPokemonViewModel.elements.observe(viewLifecycleOwner, {
                 when (it) {
                     is Resource.Success -> {
                         listPokemonViewModel.maybeFetchRemotePokemon()
@@ -106,7 +105,7 @@ class ListPokemonFragment : ScopeFragment() {
                 }
             })
 
-            listPokemonViewModel.searchResult.observe(viewLifecycleOwner, Observer {
+            listPokemonViewModel.searchResult.observe(viewLifecycleOwner, {
                 adapter.setListPokemon(it)
             })
         }
@@ -123,7 +122,7 @@ class ListPokemonFragment : ScopeFragment() {
 
         search.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String?): Boolean {
-                activity!!.hideKeyboard()
+                activity.hideKeyboard()
                 return true
             }
 

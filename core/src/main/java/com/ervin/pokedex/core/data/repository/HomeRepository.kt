@@ -16,7 +16,7 @@ class HomeRepository(
 ) : HomeRepositoryContract {
 
     override fun getAllLocalPokemon(): Flow<Resource<List<Pokemon>>> =
-        flow {
+        flow<Resource<List<Pokemon>>> {
             emit(Resource.Loading())
             /**
              * get the local db data and return it to view
@@ -39,7 +39,7 @@ class HomeRepository(
     }
 
     override fun getAllFavoritePokemon(): Flow<Resource<List<Pokemon>>> =
-        flow {
+        flow<Resource<List<Pokemon>>> {
             /**
              * get Favorite Pokemon
              */
