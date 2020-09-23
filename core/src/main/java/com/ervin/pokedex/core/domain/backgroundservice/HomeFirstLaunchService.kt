@@ -9,7 +9,6 @@ import android.content.Context
 import android.content.Intent
 import android.os.Build
 import android.os.IBinder
-import android.util.Log
 import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
 import com.ervin.pokedex.core.R
@@ -60,7 +59,6 @@ class HomeFirstLaunchService : Service() {
         }
         val notification = builder.build()
         startForeground(123, notification)
-        Log.d("sss", "ssss")
 
         getAllRemotePokemon()
 
@@ -103,14 +101,11 @@ class HomeFirstLaunchService : Service() {
             } catch (e: Exception) {
                 stopSelf()
                 stopForeground(true)
-                Log.d("sss", "dddd ${e.localizedMessage}")
                 parentCoroutineContext.cancel(CancellationException("failed to fetch remote pokemon ${e.localizedMessage}"))
             }
 
             stopSelf()
             stopForeground(true)
-            Log.d("sss", "dddd")
-
         }
     }
 

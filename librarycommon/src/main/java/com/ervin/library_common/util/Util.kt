@@ -13,7 +13,8 @@ fun calculateNoOfColumn(context: Context, widthColumnInFloat: Float): Int {
     return (screen / widthColumnInFloat + 0.5).toInt()
 }
 
-fun Activity.hideKeyboard() {
+fun Activity?.hideKeyboard() {
+    this ?: return
     val imm = this.getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager
     val view = this.currentFocus ?: View(this)
     imm.hideSoftInputFromWindow(view.windowToken, 0)
