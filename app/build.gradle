@@ -20,8 +20,12 @@ android {
     }
 
     buildTypes {
+        debug{
+            minifyEnabled true
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
         release {
-            minifyEnabled false
+            minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
@@ -43,6 +47,7 @@ dependencies {
 
     implementation fileTree(dir: "libs", include: ["*.jar"])
     implementation libs.kotlinStdlibJdk8
+    debugImplementation 'com.squareup.leakcanary:leakcanary-android:2.4'
 
     //fragment
     api 'androidx.navigation:navigation-fragment:2.3.0'
