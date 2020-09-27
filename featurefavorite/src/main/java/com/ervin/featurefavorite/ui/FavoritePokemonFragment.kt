@@ -47,6 +47,7 @@ class FavoritePokemonFragment : ScopeFragment() {
                     recyclerview_list_pokemon.setVisible()
 
                     if (it.data.isNullOrEmpty()) {
+                        lottie_empty_list.setVisible()
                         Toast.makeText(
                             activity,
                             "No favorite pokemon, let's have some!",
