@@ -14,6 +14,7 @@
 
     <View
         android:id="@+id/bg_detail"
+        android:background="@drawable/bg_detail"
         android:layout_width="0dp"
         android:layout_height="0sp"
         android:orientation="vertical"

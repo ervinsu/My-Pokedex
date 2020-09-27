@@ -101,7 +101,7 @@ class FavoritePokemonAdapter :
                 }
             }
 
-            val gd = GradientDrawable(GradientDrawable.Orientation.LEFT_RIGHT, arrayColorTypes)
+            val gd = GradientDrawable(GradientDrawable.Orientation.TOP_BOTTOM, arrayColorTypes)
             gd.cornerRadius = 0f
             itemView.poke_container.background = gd
         }

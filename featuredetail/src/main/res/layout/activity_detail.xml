@@ -51,10 +51,12 @@
                 android:id="@+id/tv_type_name1"
                 android:layout_width="0sp"
                 android:layout_height="wrap_content"
+                android:background="@drawable/bg_rounded"
                 android:padding="4sp"
                 android:textAlignment="center"
                 android:textColor="?colorOnBackground"
                 android:textSize="18sp"
+                android:transitionName="bgDetail"
                 app:layout_constraintBottom_toTopOf="@id/poke_hp"
                 app:layout_constraintStart_toEndOf="@id/iv_poke_picture"
                 app:layout_constraintTop_toTopOf="parent"
@@ -65,10 +67,12 @@
                 android:layout_width="0sp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8sp"
+                android:background="@drawable/bg_rounded"
                 android:padding="4sp"
                 android:textAlignment="center"
                 android:textColor="?attr/colorOnBackground"
                 android:textSize="18sp"
+                android:transitionName="bgDetail"
                 app:layout_constraintBottom_toTopOf="@id/poke_hp"
                 app:layout_constraintStart_toEndOf="@id/tv_type_name1"
                 app:layout_constraintTop_toTopOf="parent"
@@ -94,32 +98,17 @@
                 android:textColor="?attr/colorOnBackground"
                 android:textSize="16sp"
                 android:textStyle="bold"
+                android:transitionName="bgDetail"
                 app:layout_constraintStart_toStartOf="@id/rv_poke_type"
                 app:layout_constraintTop_toBottomOf="@id/rv_poke_type" />
 
-            <ProgressBar
-                android:id="@+id/progressbar_hp"
-                style="@style/CustomProgressBarHorizontal"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:indeterminate="false"
+            <com.skydoves.progressview.ProgressView
+                android:id="@+id/progressViewHp"
+                style="@style/CustomProgressView"
+                app:layout_constraintBottom_toBottomOf="@id/poke_hp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@id/poke_hp"
                 app:layout_constraintTop_toTopOf="@id/poke_hp" />
-
-            <TextView
-                android:id="@+id/tv_poke_hp"
-                style="?android:attr/progressBarStyleHorizontal"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:minWidth="100sp"
-                android:paddingStart="8sp"
-                android:paddingEnd="8sp"
-                android:textColor="?attr/colorOnBackground"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@id/poke_hp"
-                app:layout_constraintTop_toTopOf="@id/poke_hp"
-                tools:text="70" />
 
             <TextView
                 android:id="@+id/poke_attack"
@@ -130,32 +119,17 @@
                 android:textColor="?attr/colorOnBackground"
                 android:textSize="16sp"
                 android:textStyle="bold"
+                android:transitionName="bgDetail"
                 app:layout_constraintStart_toStartOf="@id/rv_poke_type"
                 app:layout_constraintTop_toBottomOf="@id/poke_hp" />
 
-            <ProgressBar
-                android:id="@+id/progressbar_attack"
-                style="@style/CustomProgressBarHorizontal"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:indeterminate="false"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@id/poke_hp"
+            <com.skydoves.progressview.ProgressView
+                android:id="@+id/progressViewAtk"
+                style="@style/CustomProgressView"
+                app:layout_constraintBottom_toBottomOf="@id/poke_attack"
+                app:layout_constraintEnd_toEndOf="@id/progressViewHp"
+                app:layout_constraintStart_toStartOf="@id/progressViewHp"
                 app:layout_constraintTop_toTopOf="@id/poke_attack" />
-
-            <TextView
-                android:id="@+id/tv_poke_attack"
-                style="?android:attr/progressBarStyleHorizontal"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:minWidth="100sp"
-                android:paddingStart="8sp"
-                android:paddingEnd="8sp"
-                android:textColor="?attr/colorOnBackground"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@id/poke_hp"
-                app:layout_constraintTop_toTopOf="@id/poke_attack"
-                tools:text="70" />
 
             <TextView
                 android:id="@+id/poke_defense"
@@ -166,32 +140,18 @@
                 android:textColor="?attr/colorOnBackground"
                 android:textSize="16sp"
                 android:textStyle="bold"
+                android:transitionName="bgDetail"
                 app:layout_constraintStart_toStartOf="@id/rv_poke_type"
                 app:layout_constraintTop_toBottomOf="@id/poke_attack" />
 
-            <ProgressBar
-                android:id="@+id/progressbar_defense"
-                style="@style/CustomProgressBarHorizontal"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:indeterminate="false"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@id/poke_hp"
+            <com.skydoves.progressview.ProgressView
+                android:id="@+id/progressViewDef"
+                style="@style/CustomProgressView"
+                app:layout_constraintBottom_toBottomOf="@id/poke_defense"
+                app:layout_constraintEnd_toEndOf="@id/progressViewHp"
+                app:layout_constraintStart_toStartOf="@id/progressViewHp"
                 app:layout_constraintTop_toTopOf="@id/poke_defense" />
 
-            <TextView
-                android:id="@+id/tv_poke_defense"
-                style="?android:attr/progressBarStyleHorizontal"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:minWidth="100sp"
-                android:paddingStart="8sp"
-                android:paddingEnd="8sp"
-                android:textColor="?attr/colorOnBackground"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@id/poke_hp"
-                app:layout_constraintTop_toTopOf="@id/poke_defense"
-                tools:text="70" />
 
             <TextView
                 android:id="@+id/poke_speed"
@@ -202,32 +162,17 @@
                 android:textColor="?attr/colorOnBackground"
                 android:textSize="16sp"
                 android:textStyle="bold"
+                android:transitionName="bgDetail"
                 app:layout_constraintStart_toStartOf="@id/rv_poke_type"
                 app:layout_constraintTop_toBottomOf="@id/poke_defense" />
 
-            <ProgressBar
-                android:id="@+id/progressbar_speed"
-                style="@style/CustomProgressBarHorizontal"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:indeterminate="false"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@id/poke_hp"
+            <com.skydoves.progressview.ProgressView
+                android:id="@+id/progressViewSpeed"
+                style="@style/CustomProgressView"
+                app:layout_constraintBottom_toBottomOf="@id/poke_speed"
+                app:layout_constraintEnd_toEndOf="@id/progressViewHp"
+                app:layout_constraintStart_toStartOf="@id/progressViewHp"
                 app:layout_constraintTop_toTopOf="@id/poke_speed" />
-
-            <TextView
-                android:id="@+id/tv_poke_speed"
-                style="?android:attr/progressBarStyleHorizontal"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:minWidth="100sp"
-                android:paddingStart="8sp"
-                android:paddingEnd="8sp"
-                android:textColor="?attr/colorOnBackground"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@id/poke_hp"
-                app:layout_constraintTop_toTopOf="@id/poke_speed"
-                tools:text="70" />
 
             <TextView
                 android:id="@+id/poke_sp_attack"
@@ -238,32 +183,17 @@
                 android:textColor="?attr/colorOnBackground"
                 android:textSize="16sp"
                 android:textStyle="bold"
+                android:transitionName="bgDetail"
                 app:layout_constraintStart_toStartOf="@id/rv_poke_type"
                 app:layout_constraintTop_toBottomOf="@id/poke_speed" />
 
-            <ProgressBar
-                android:id="@+id/progressbar_sp_attack"
-                style="@style/CustomProgressBarHorizontal"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:indeterminate="false"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@id/poke_hp"
+            <com.skydoves.progressview.ProgressView
+                android:id="@+id/progressViewSpAtk"
+                style="@style/CustomProgressView"
+                app:layout_constraintBottom_toBottomOf="@id/poke_sp_attack"
+                app:layout_constraintEnd_toEndOf="@id/progressViewHp"
+                app:layout_constraintStart_toStartOf="@id/progressViewHp"
                 app:layout_constraintTop_toTopOf="@id/poke_sp_attack" />
-
-            <TextView
-                android:id="@+id/tv_poke_sp_attack"
-                style="?android:attr/progressBarStyleHorizontal"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:minWidth="100sp"
-                android:paddingStart="8sp"
-                android:paddingEnd="8sp"
-                android:textColor="?attr/colorOnBackground"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@id/poke_hp"
-                app:layout_constraintTop_toTopOf="@id/poke_sp_attack"
-                tools:text="70" />
 
             <TextView
                 android:id="@+id/poke_sp_defense"
@@ -274,32 +204,18 @@
                 android:textColor="?attr/colorOnBackground"
                 android:textSize="16sp"
                 android:textStyle="bold"
+                android:transitionName="bgDetail"
                 app:layout_constraintStart_toStartOf="@id/rv_poke_type"
                 app:layout_constraintTop_toBottomOf="@id/poke_sp_attack" />
 
-            <ProgressBar
-                android:id="@+id/progressbar_sp_defense"
-                style="@style/CustomProgressBarHorizontal"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:indeterminate="false"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@id/poke_hp"
+            <com.skydoves.progressview.ProgressView
+                android:id="@+id/progressViewSpDef"
+                style="@style/CustomProgressView"
+                app:layout_constraintBottom_toBottomOf="@id/poke_sp_defense"
+                app:layout_constraintEnd_toEndOf="@id/progressViewHp"
+                app:layout_constraintStart_toStartOf="@id/progressViewHp"
                 app:layout_constraintTop_toTopOf="@id/poke_sp_defense" />
 
-            <TextView
-                android:id="@+id/tv_poke_sp_defense"
-                style="?android:attr/progressBarStyleHorizontal"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:minWidth="100sp"
-                android:paddingStart="8sp"
-                android:paddingEnd="8sp"
-                android:textColor="?attr/colorOnBackground"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@id/poke_hp"
-                app:layout_constraintTop_toTopOf="@id/poke_sp_defense"
-                tools:text="70" />
 
             <LinearLayout
                 android:id="@+id/poke_weight"
@@ -337,12 +253,11 @@
                 android:id="@+id/poke_height"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="30sp"
                 android:layout_marginEnd="24sp"
                 android:orientation="horizontal"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@id/poke_weight"
-                app:layout_constraintTop_toBottomOf="@id/tv_poke_sp_defense">
+                app:layout_constraintTop_toTopOf="@id/poke_weight">
 
                 <TextView
                     android:layout_width="0dp"
@@ -382,10 +297,10 @@
     <LinearLayout
         android:id="@+id/bg_detail"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="0dp"
         android:layout_marginStart="16sp"
         android:layout_marginEnd="16sp"
-        android:background="?android:attr/colorBackground"
+        android:background="@drawable/bg_detail"
         android:elevation="-1dp"
         android:orientation="horizontal"
         android:transitionName="bgDetail"
