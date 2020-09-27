@@ -80,7 +80,7 @@ class DetailActivity : AppCompatActivity() {
             }
         }
 
-        val gd = GradientDrawable(GradientDrawable.Orientation.LEFT_RIGHT, arrayColorTypes)
+        val gd = GradientDrawable(GradientDrawable.Orientation.TOP_BOTTOM, arrayColorTypes)
         poke_container.background = gd
         detail_toolbar.background = gd
 
@@ -91,21 +91,21 @@ class DetailActivity : AppCompatActivity() {
         }
 
         iv_poke_picture.loadImage(pokemon.pokemonSpritesUrl)
-        tv_poke_attack.text = pokemon.pokemonAttack.toString()
-        tv_poke_defense.text = pokemon.pokemonDefense.toString()
-        tv_poke_hp.text = pokemon.pokemonHp.toString()
-        tv_poke_speed.text = pokemon.pokemonSpeed.toString()
-        tv_poke_sp_attack.text = pokemon.pokemonSpAtk.toString()
-        tv_poke_sp_defense.text = pokemon.pokemonSpDef.toString()
+        progressViewAtk.labelText = pokemon.pokemonAttack.toString()
+        progressViewDef.labelText = pokemon.pokemonDefense.toString()
+        progressViewHp.labelText = pokemon.pokemonHp.toString()
+        progressViewSpeed.labelText = pokemon.pokemonSpeed.toString()
+        progressViewSpAtk.labelText = pokemon.pokemonSpAtk.toString()
+        progressViewSpDef.labelText = pokemon.pokemonSpDef.toString()
         tv_weight.text = "${pokemon.pokemonWeight.toFloat() / 10} Kg"
         tv_height.text = "${pokemon.pokemonHeight.toFloat() / 10} m"
 
-        progressbar_hp.progress = pokemon.pokemonHp
-        progressbar_attack.progress = pokemon.pokemonAttack
-        progressbar_defense.progress = pokemon.pokemonDefense
-        progressbar_speed.progress = pokemon.pokemonSpeed
-        progressbar_sp_attack.progress = pokemon.pokemonSpAtk
-        progressbar_sp_defense.progress = pokemon.pokemonSpDef
+        progressViewHp.progress = pokemon.pokemonHp.toFloat()
+        progressViewAtk.progress = pokemon.pokemonAttack.toFloat()
+        progressViewDef.progress = pokemon.pokemonDefense.toFloat()
+        progressViewSpeed.progress = pokemon.pokemonSpeed.toFloat()
+        progressViewSpAtk.progress = pokemon.pokemonSpAtk.toFloat()
+        progressViewSpDef.progress = pokemon.pokemonSpDef.toFloat()
 
         setFavoritePokemon(pokemon.isFavorite)
     }
@@ -120,7 +120,9 @@ class DetailActivity : AppCompatActivity() {
 
     private fun TextView.setType(type: Type) {
         text = type.typeName
-        setBackgroundColor(Color.parseColor(type.typeColor))
+        val tempBackground = background as GradientDrawable
+        tempBackground.setColor(Color.parseColor(type.typeColor))
+        background = tempBackground
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {

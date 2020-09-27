@@ -1,11 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <style name="CustomProgressBarHorizontal" parent="android:Widget.ProgressBar.Horizontal">
-        <item name="android:scaleY">1</item>
-        <item name="android:max">150</item>
-        <item name="android:minWidth">100sp</item>
-        <item name="android:progressTint">?attr/colorAccent</item>
-        <item name="android:progressBackgroundTint">?attr/colorPrimary</item>
+    <style name="CustomProgressView">
+        <item name="android:layout_width">100dp</item>
+        <item name="android:layout_height">0dp</item>
+        <item name="progressView_radius">8dp</item>
+        <item name="progressView_colorBackground">?attr/colorPrimary</item>
+        <item name="progressView_colorProgress">?attr/colorAccent</item>
+        <item name="progressView_max">155</item>
+        <item name="progressView_min">0</item>
+        <item name="progressView_progress">0</item>
+        <item name="progressView_labelSize">16dp</item>
+        <item name="progressView_labelColorInner">?attr/colorOnBackground</item>
+        <item name="progressView_labelColorOuter">?attr/colorOnBackground</item>
+        <item name="progressView_progressFromPrevious">true</item>
     </style>
 </resources>

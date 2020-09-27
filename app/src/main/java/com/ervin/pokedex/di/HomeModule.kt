@@ -37,8 +37,8 @@ val homeRepositoryModule = module {
 @FlowPreview
 @ExperimentalCoroutinesApi
 val homeActivityModule = module {
-    factory<HomeUseCase> { HomeInteractor(get(), androidContext()) }
-    viewModel { ListPokemonViewModel(get()) }
+    factory<HomeUseCase>(named("homeUseCase")) { HomeInteractor(get(), androidContext()) }
+    viewModel { ListPokemonViewModel(get(named("homeUseCase"))) }
     viewModel { AboutMeViewModel() }
 }
 

@@ -6,7 +6,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
 import com.ervin.feature_detail.ui.DetailActivity
 import com.ervin.featurefavorite.R
@@ -18,16 +17,14 @@ import com.ervin.library_common.navigation.FeatureDetail
 import com.ervin.library_common.util.calculateNoOfColumn
 import com.ervin.pokedex.core.data.source.Resource
 import kotlinx.android.synthetic.main.fragment_favorite_pokemon.*
+import org.koin.android.scope.ScopeFragment
 import org.koin.android.viewmodel.ext.android.viewModel
 import org.koin.core.context.loadKoinModules
-import org.koin.java.KoinJavaComponent.get
 
-class FavoritePokemonFragment : Fragment() {
+class FavoritePokemonFragment : ScopeFragment() {
 
     private val favoritePokemonViewModel: FavoritePokemonViewModel by viewModel()
-    private val adapter: FavoritePokemonAdapter by lazy {
-        get(FavoritePokemonAdapter::class.java)
-    }
+    private val adapter: FavoritePokemonAdapter by inject()
 
     override fun onCreateView(
         inflater: LayoutInflater,
