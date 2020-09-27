@@ -79,6 +79,7 @@ class ListPokemonFragment : ScopeFragment() {
                         }
                     }
                     is Resource.Error -> {
+                        lottie_empty_list.setVisible()
                         recyclerview_list_pokemon.setGone()
                         pg_list_pokemon.setGone()
                         Toast.makeText(activity, "Failed to get Data Pokemon", Toast.LENGTH_LONG)
