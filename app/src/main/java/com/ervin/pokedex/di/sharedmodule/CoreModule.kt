@@ -21,7 +21,7 @@ import java.util.concurrent.TimeUnit
 val localModule = module {
     factory { get<PokemonDatabase>().pokemonDao() }
     single {
-        val passphrase: ByteArray = SQLiteDatabase.getBytes("dicoding".toCharArray())
+        val passphrase: ByteArray = SQLiteDatabase.getBytes("pokedex".toCharArray())
         val factory = SupportFactory(passphrase)
         Room.databaseBuilder(
             androidContext(),

@@ -12,6 +12,7 @@ android {
     defaultConfig {
         applicationId "com.ervin.pokedex"
         minSdkVersion androidVersion.minSdkVersion
+        ndkVersion "21.3.6528147"
         targetSdkVersion androidVersion.targetSdkVersion
         versionCode 1
         versionName "1.0"
