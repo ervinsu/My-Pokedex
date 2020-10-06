@@ -1,5 +1,8 @@
 # My-Pokedex
-[![ervinsu](https://circleci.com/gh/ervinsu/My-Pokedex.svg?style=svg)](https://app.circleci.com/pipelines/github/ervinsu/My-Pokedex)
+
+<a href="https://github.com/ervinsu/My-Pokedex/actions"><img alt="Build Status" src="https://github.com/ervinsu/My-Pokedex/workflows/Android%20CI/badge.svg"/></a> 
+ 
+[![ervinsu](https://circleci.com/gh/ervinsu/My-Pokedex.svg?style=svg)](https://app.circleci.com/pipelines/github/ervinsu/My-Pokedex) 
 
 # Definiton of each module
 | Module           | Usage          |
